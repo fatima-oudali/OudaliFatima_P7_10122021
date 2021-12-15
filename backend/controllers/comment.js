@@ -18,7 +18,7 @@ exports.getAllComment = (req, res, next) => {
          if(err) {
              console.log(err);
          } else {
-             res.send("valeurs insérées")
+            res.status(200).json({ message: "valeurs insérées" });
          }
      }
      );
@@ -34,7 +34,7 @@ exports.getAllComment = (req, res, next) => {
          if (err) {
              console.log(err);
          } else {
-             console.log(result);
+            res.status(200).json({ message: "commentaire modifié !" });
          }
      })
    };
@@ -45,7 +45,7 @@ exports.getAllComment = (req, res, next) => {
          if (err) {
              console.log(err);
          } else {
-             res.send(result);
+            res.status(200).json({ message: "commentaire supprimé !" });
          }
      })
    };
@@ -56,7 +56,7 @@ exports.getAllComment = (req, res, next) => {
        if (err) {
            console.log(err);
        } else {
-           res.send(result);
+        res.status(200).json(result);
        }
     })
    };

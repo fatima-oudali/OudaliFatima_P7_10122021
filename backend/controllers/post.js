@@ -20,7 +20,7 @@ exports.createPost = (req, res, next) => {
       if(err) {
           console.log(err);
       } else {
-          res.send("valeurs insérées")
+        res.status(200).json({ message: "valeurs insérées" });
       }
   }
   );
@@ -36,7 +36,7 @@ exports.modifyPost = (req, res, next) => {
       if (err) {
           console.log(err);
       } else {
-          console.log(result);
+        res.status(200).json({ message: "post modifié !" });
       }
   })
 };
@@ -47,7 +47,7 @@ exports.deletePost = (req, res, next) => {
       if (err) {
           console.log(err);
       } else {
-          res.send(result);
+        res.status(200).json({ message: "post supprimé !" });
       }
   })
 };
@@ -58,7 +58,7 @@ exports.getOnePost = (req, res, next) => {
     if (err) {
         console.log(err);
     } else {
-        res.send(result);
+        res.status(200).json(result);
     }
  })
 };
