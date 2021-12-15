@@ -6,10 +6,10 @@ const router = express.Router();
 const auth = require('../middleware/auth');
 const multer = require('../middleware/multer-config');
 const postCtrl = require('../controllers/post');
-const likeCtrl = require('../controllers/like');
+
 
 //Chaque router a son CRUD (create, read, update, delete) avec son chemin et ses droits
-router.post("/", multer, postCtrl.createPost);
+router.post("/", auth, multer, postCtrl.createPost);
 
 router.put("/:id", auth, multer, postCtrl.modifyPost);
 
@@ -17,9 +17,8 @@ router.delete("/:id", auth, postCtrl.deletePost);
 
 router.get("/:id", auth, postCtrl.getOnePost);
 
-router.get("/", postCtrl.getAllPost);
+router.get("/", auth, postCtrl.getAllPost);
 
-router.post("/:id/like", auth, likeCtrl.feedbackPost);
 
 
 
