@@ -17,6 +17,7 @@ exports.signup = (req, res, next) => {
        (err, result) => {
            if(err) {
                console.log(err);
+               res.status(400).json({error})
            } else {
                res.status(200).json(result);
            }

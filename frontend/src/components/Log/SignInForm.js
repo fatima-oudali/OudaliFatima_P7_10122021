@@ -17,12 +17,13 @@ const SignInForm = () => {
           data: {
             email,
             password,
-          }
+          },
       })
       .then((res) => {
-          if(res.data.errors) {
-            emailError.innerHTML = res.data.errors.email;
-            passwordError.innerHTML = res.data.errors.password;
+          console.log(res);
+          if(res.data.error) {
+            emailError.innerHTML = res.data.error.email;
+            passwordError.innerHTML = res.data.error.password;
           } else {
               window.location = '/';
           }
