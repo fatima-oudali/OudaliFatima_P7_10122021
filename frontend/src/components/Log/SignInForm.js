@@ -20,7 +20,7 @@ const SignInForm = () => {
           },
       })
       .then((res) => {
-          console.log(res);
+          console.log(res.data);
           if(res.data.error) {
             emailError.innerHTML = res.data.error.email;
             passwordError.innerHTML = res.data.error.password;
