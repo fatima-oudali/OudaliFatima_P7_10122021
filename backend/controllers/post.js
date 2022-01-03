@@ -11,18 +11,35 @@ exports.getAllPost = (req, res, next) => {
  })
 };
 
-exports.createPost = (req, res, next) => {
-    const contenu = req.body.contenu;
+// exports.createPost = (req, res, next) => {
+//     const contenu = req.body.contenu;
 
-  db.query('INSERT INTO post (contenu) VALUES ?',
-  [contenu],
-  (err, result) => {
-      if(err) {
-          console.log(err);
+//   db.query('INSERT INTO post (contenu) VALUES ?',
+//   [contenu],
+//   (err, result) => {
+//       if(err) {
+//           console.log(err);
+//       } else {
+//         res.status(200).json({ message: "valeurs insérées" });
+//       }
+//   }
+//   );
+// };
+
+exports.createPost = (req, res, next) => {
+  const contenu = req.body.contenu;
+  const userId = req.body.userId;
+
+  db.query(
+    "INSERT INTO post (contenu, user_id) VALUES (?, ?)",
+    [contenu, userId],
+    (err, result) => {
+      if (err) {
+        console.log(err);
       } else {
         res.status(200).json({ message: "valeurs insérées" });
       }
-  }
+    }
   );
 };
 

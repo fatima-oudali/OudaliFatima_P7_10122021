@@ -18,14 +18,31 @@ app.use(helmet());
 
 
 //Définition des CORS
-  app.use((req, res, next) => {
+//   app.use((req, res, next) => {
+//   //Qui peut accéder à l'API
+//   res.setHeader("Access-Control-Allow-Origin", "http://localhost:3001");
+//   //Quels Headers sont autorisés
+//   res.setHeader(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization"
+//   );
+//   //Quelles méthodes sont possibles
+//   res.setHeader(
+//     "Access-Control-Allow-Methods",
+//     "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+//   );
+//   next();
+// });
+
+app.use((req, res, next) => {
   //Qui peut accéder à l'API
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3001");
   //Quels Headers sont autorisés
   res.setHeader(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization"
   );
+  res.setHeader("Access-Control-Allow-Credentials", true);
   //Quelles méthodes sont possibles
   res.setHeader(
     "Access-Control-Allow-Methods",
@@ -34,13 +51,15 @@ app.use(helmet());
   next();
 });
 
+
+
 app.use(bodyParser.json());
 
 //Gestion des principaux chemins de l'API: post, comment, auth et images
 //Gestion des routes principales
 app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/post', postRoutes);
-app.use('/api/comment', commentRoutes);
+//app.use('/api/comment', commentRoutes);
 app.use('/api/auth', userRoutes);
 
 //on exporte l'application créée pour qu'on puisse y accéder depuis les autres fichiers de notre projet
