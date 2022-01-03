@@ -13,10 +13,9 @@ exports.signup = (req, res, next) => {
        const email = req.body.email;
        const password = hash;
        db.query('INSERT INTO user (email, password) VALUES (?, ?)', 
-       [email, hash],
+       [email, password],
        (err, result) => {
            if(err) {
-               console.log(err);
                res.status(400).json({error})
            } else {
                res.status(200).json(result);
@@ -30,13 +29,13 @@ exports.signup = (req, res, next) => {
 exports.login = (req, res, next) => {
     const email = req.body.email;
     db.query('SELECT * FROM user WHERE email =?', [email], (err, result) => {
-        User.findOne({email: req.body.email})
-    .then(user => {
+       User.findOne({email: req.body.email})
+    .then((user) => {
         if (!user) {
             return res.status(401).json({error: {email: 'Email incorrect !'}});
         }
         bcrypt.compare(req.body.password, user.password)
-        .then(valid => {
+        .then((valid) => {
             if (!valid){
                 return res.status(401).json({error: {password: 'Mot de passe incorrect !'}})
             }

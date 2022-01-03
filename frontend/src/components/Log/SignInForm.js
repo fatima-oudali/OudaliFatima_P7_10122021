@@ -6,27 +6,27 @@ const SignInForm = () => {
   const [password, setPassword] = useState("");
 
   const handleLogin = (e) => {
-      e.preventDefault();
-      const emailError = document.querySelector('.email.error');
-      const passwordError = document.querySelector('.password.error');
+    e.preventDefault();
+    const emailError = document.querySelector(".email.error");
+    const passwordError = document.querySelector(".password.error");
 
-      axios({
-          method: "post",
-          url: `${process.env.REACT_APP_API_URL}api/user/login`,
-          withCredentials: true,
-          data: {
-            email,
-            password,
-          },
-      })
+    axios({
+      method: "post",
+      url: `${process.env.REACT_APP_API_URL}api/auth/login`,
+      withCredentials: true,
+      data: {
+        email,
+        password,
+      },
+    })
       .then((res) => {
-          console.log(res.data);
-          if(res.data.error) {
-            emailError.innerHTML = res.data.error.email;
-            passwordError.innerHTML = res.data.error.password;
-          } else {
-              window.location = '/';
-          }
+        console.log(res);
+        if (res.data.error) {
+          emailError.innerHTML = res.data.error.email;
+          passwordError.innerHTML = res.data.error.password;
+        } else {
+          window.location = "/";
+        }
       })
       .catch((err) => {
         console.log(err);
