@@ -54,9 +54,33 @@ exports.signup = (req, res, next) => {
 //     })
 // };
 
+// exports.login = (req, res, next) => {
+//     const email = req.body.email;
+//     db.query("SELECT * FROM user WHERE email =?", [email], (err, result) => {
+//       const user = result[0];
+//       bcrypt.compare(req.body.password, user.password).then((valid) => {
+//         if (!valid) {
+//           return res
+//             .status(401)
+//             .json({ error: { password: "Mot de passe incorrect !" } });
+//         }
+//         res.status(200).json({
+//           userId: user._id,
+//           token: jwt.sign({ userId: user.id }, `${process.env.JWT_SECRET}`, {
+//             expiresIn: "24h",
+//           }),
+//         });
+//       });
+//     });
+//   };
+
 exports.login = (req, res, next) => {
     const email = req.body.email;
     db.query("SELECT * FROM user WHERE email =?", [email], (err, result) => {
+      if (err || !result.length) {
+        return res.status(401).json({ error: { email: "Email non trouvé" } });
+      }
+  
       const user = result[0];
       bcrypt.compare(req.body.password, user.password).then((valid) => {
         if (!valid) {

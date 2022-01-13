@@ -23,8 +23,8 @@ const Log = () => {
                     <li onClick={handaleModals} id="inscription" className={signUpModal ? "active-btn" : null} > S'inscrire </li>
                     <li onClick={handaleModals} id="connection" className={signInModal ? "active-btn" : null}> Se connecter </li>
                 </ul>
-                {signUpModal && <SignUpForm />}
-                {signInModal && <SignInForm />}
+                {signUpModal && <SignUpForm />} 
+                {signInModal && <SignInForm />} 
             </div>
         </div>
     );
