@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 13 jan. 2022 à 22:30
+-- Généré le : jeu. 13 jan. 2022 à 22:33
 -- Version du serveur : 10.4.22-MariaDB
 -- Version de PHP : 8.0.13
 
@@ -20,6 +20,32 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `groupomania`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `comment`
+--
+
+CREATE TABLE `comment` (
+  `id` int(11) NOT NULL,
+  `contenu` varchar(255) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `post_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `post`
+--
+
+CREATE TABLE `post` (
+  `id` int(11) NOT NULL,
+  `contenu` text NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -49,6 +75,21 @@ INSERT INTO `user` (`id`, `email`, `password`) VALUES
 --
 
 --
+-- Index pour la table `comment`
+--
+ALTER TABLE `comment`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `post_id` (`post_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Index pour la table `post`
+--
+ALTER TABLE `post`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
 -- Index pour la table `user`
 --
 ALTER TABLE `user`
@@ -60,10 +101,39 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT pour la table `comment`
+--
+ALTER TABLE `comment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `post`
+--
+ALTER TABLE `post`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `comment`
+--
+ALTER TABLE `comment`
+  ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `post`
+--
+ALTER TABLE `post`
+  ADD CONSTRAINT `post_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
