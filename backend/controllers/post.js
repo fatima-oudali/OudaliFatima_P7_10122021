@@ -1,7 +1,7 @@
 const fs = require("fs");
 const db = require('../db');
 
-//appel de toutes les sauces avec request et response, et next pour passer au prochain controller
+
 exports.getAllPost = (req, res, next) => {
  db.query('SELECT * FROM post', ( err, result) => {
      if (err) {
@@ -11,28 +11,15 @@ exports.getAllPost = (req, res, next) => {
  })
 };
 
-// exports.createPost = (req, res, next) => {
-//     const contenu = req.body.contenu;
-
-//   db.query('INSERT INTO post (contenu) VALUES ?',
-//   [contenu],
-//   (err, result) => {
-//       if(err) {
-//           console.log(err);
-//       } else {
-//         res.status(200).json({ message: "valeurs insérées" });
-//       }
-//   }
-//   );
-// };
-
 exports.createPost = (req, res, next) => {
   const contenu = req.body.contenu;
-  const userId = req.body.userId;
+  const id = req.params.id;
+  const img =`${req.protocol}://${req.get("host")}/images/${
+    req.file.filename}`
 
   db.query(
-    "INSERT INTO post (contenu, user_id) VALUES (?, ?)",
-    [contenu, userId],
+    `INSERT INTO post (img, contenu, id) VALUES (?, ?, ${id})`,
+    [img, contenu, id],
     (err, result) => {
       if (err) {
         console.log(err);
@@ -44,11 +31,12 @@ exports.createPost = (req, res, next) => {
 };
 
 exports.modifyPost = (req, res, next) => {
-  const id = req.body.id;
+  const id = req.params.id;
   const contenu = req.body.contenu;
+  const img = req.body.img;
 
-  db.query('UPDATE post SET contenu = ? WHERE id = ?', 
-  [contenu, id],
+  db.query(`UPDATE post SET img = ?, contenu = ? WHERE id = ${id}`, 
+  [img, contenu, id],
   (err, result) => {
       if (err) {
           console.log(err);

@@ -1,4 +1,5 @@
 import Navbar from "../components/Navbar";
+import Thread from "../components/Thread";
 
 
 const Home = () => {
@@ -6,7 +7,7 @@ const Home = () => {
         <>
         <Navbar/>
         <div className='home'>            
-            <h1>Accueil</h1>
+            <Thread/>
         </div>
         </>
     )

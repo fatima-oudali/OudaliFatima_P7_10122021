@@ -1,99 +1,91 @@
 //importation des packages
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const db = require('../db');
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const db = require("../db");
 require("dotenv").config(); //importation pour l'utilisation des variables d'environnements
 
 
 
 //l'enregistrement de nouveaux utilisateurs
 exports.signup = (req, res, next) => {
-    bcrypt.hash(req.body.password, 10)
-    .then(hash => {
-       const email = req.body.email;
-       const password = hash;
-       db.query('INSERT INTO user (email, password) VALUES (?, ?)', 
-       [email, password],
-       (err, result) => {
-           if(err) {
-               res.status(400).json({error})
-           } else {
-               res.status(200).json(result);
-           }
-       }) 
+  if (!req.body.pseudo || !req.body.email || !req.body.password) {
+    return res
+      .status(400)
+      .json({ error: "Pseudo or Email or password missing" });
+  }
+  bcrypt
+    .hash(req.body.password, 10)
+    .then((hash) => {
+      const pseudo = req.body.pseudo;
+      const email = req.body.email;
+      const password = hash;
+      db.query(
+        "INSERT INTO user (pseudo, email, password) VALUES (?, ?, ?)",
+        [pseudo, email, password],
+        (error, res) => {
+          if (error) {
+            res.status(400).json({ error });
+          } else {
+            res.status(200).json({ message: "inscription ok" });
+          }
+        }
+      );
     })
-    .catch(error => res.status(500).json({error}));
+    .catch((error) => res.status(500).json({ error }));
 };
 
-//connecter des utilisateurs existants
-// exports.login = (req, res, next) => {
-//     const email = req.body.email;
-//     db.query('SELECT * FROM user WHERE email =?', [email], (err, result) => {
-//        User.findOne({email: req.body.email})
-//     .then((user) => {
-//         if (!user) {
-//             return res.status(401).json({error: {email: 'Email incorrect !'}});
-//         }
-//         bcrypt.compare(req.body.password, user.password)
-//         .then((valid) => {
-//             if (!valid){
-//                 return res.status(401).json({error: {password: 'Mot de passe incorrect !'}})
-//             }
-//             res.status(200).json({
-//                 userId: user._id,
-//                 token: jwt.sign (
-//                     {userId: user.id},
-//                     `${process.env.JWT_SECRET}`,
-//                     {expiresIn: '24h'}
-//                 )
-//             })
-//         })
-//         .catch(error => res.status(500).json({error}));
-//     })
-//     .catch(error => res.status(500).json({error}));
-//     })
-// };
-
-// exports.login = (req, res, next) => {
-//     const email = req.body.email;
-//     db.query("SELECT * FROM user WHERE email =?", [email], (err, result) => {
-//       const user = result[0];
-//       bcrypt.compare(req.body.password, user.password).then((valid) => {
-//         if (!valid) {
-//           return res
-//             .status(401)
-//             .json({ error: { password: "Mot de passe incorrect !" } });
-//         }
-//         res.status(200).json({
-//           userId: user._id,
-//           token: jwt.sign({ userId: user.id }, `${process.env.JWT_SECRET}`, {
-//             expiresIn: "24h",
-//           }),
-//         });
-//       });
-//     });
-//   };
-
 exports.login = (req, res, next) => {
-    const email = req.body.email;
-    db.query("SELECT * FROM user WHERE email =?", [email], (err, result) => {
-      if (err || !result.length) {
-        return res.status(401).json({ error: { email: "Email non trouvé" } });
+  const email = req.body.email;
+  db.query("SELECT * FROM user WHERE email =?", [email], (err, result) => {
+    if (err || !result.length) {
+      return res.status(401).json({ error: { email: "Email non trouvé" } });
+    }
+
+    const user = result[0];
+    bcrypt.compare(req.body.password, user.password).then((valid) => {
+      if (!valid) {
+        return res
+          .status(401)
+          .json({ error: { password: "Mot de passe incorrect !" } });
       }
-  
-      const user = result[0];
-      bcrypt.compare(req.body.password, user.password).then((valid) => {
-        if (!valid) {
-          return res
-            .status(401)
-            .json({ error: { password: "Mot de passe incorrect !" } });
-        }
-        res.status(200).json({
-          userId: user._id,
-          token: jwt.sign({ userId: user.id }, `${process.env.JWT_SECRET}`, {
-            expiresIn: "24h",
-          }),
-        });
+      res.status(200).json({
+        userId: user.id,
+        pseudo: user.pseudo,
+        token: jwt.sign({ userId: user.id }, `${process.env.JWT_SECRET}`, {
+          expiresIn: "24h",
+        }),
       });
     });
-  };
+  });
+};
+
+exports.getAllUser = (req, res, next) => {
+  db.query('SELECT * FROM user', ( err, result) => {
+      if (err) {
+          console.log(err);
+      }
+      res.status(200).json(result);
+  })
+ };
+
+ exports.getOneUser = (req, res, next) => {
+  const id = req.params.id;
+  db.query('SELECT * FROM user WHERE id = ?', id, (err, result) => {
+     if (err) {
+         console.log(err);
+     } else {
+         res.status(200).json(result);
+     }
+  })
+ };
+ 
+ exports.deleteUser = (req, res, next) => {
+  const id = req.params.id;
+  db.query('DELETE FROM user WHERE id =?', id, (err, result) => {
+      if (err) {
+          console.log(err);
+      } else {
+        res.status(200).json({ message: "utilisateur supprimé !" });
+      }
+  })
+};

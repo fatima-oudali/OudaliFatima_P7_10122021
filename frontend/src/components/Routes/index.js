@@ -4,6 +4,7 @@ import Home from '../../pages/Home';
 import Profil from '../../pages/Profil';
 import NotFound from '../../pages/NotFound';
 
+
 const index = () => {
     return (
         <BrowserRouter>

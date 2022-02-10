@@ -1,12 +1,13 @@
-import React from 'react';
-import axios from 'axios';
+import React from "react";
 
 const Logout = () => {
-    return (
-        <div>
-            
-        </div>
-    );
+    const logout = () => {
+        localStorage.clear();
+        window.location.href = "/profil"
+    }
+
+    return <li onClick={logout}><img src="./img/icons/logout.svg" alt="logout" /></li>
+
 };
 
 export default Logout;
