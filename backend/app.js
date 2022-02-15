@@ -11,28 +11,8 @@ const postRoutes = require('./routes/post');
 const commentRoutes =require('./routes/comment');
 const userRoutes = require('./routes/user');
 
-
 var helmet = require('helmet');
 app.use(helmet());
-
-
-
-//Définition des CORS
-//   app.use((req, res, next) => {
-//   //Qui peut accéder à l'API
-//   res.setHeader("Access-Control-Allow-Origin", "http://localhost:3001");
-//   //Quels Headers sont autorisés
-//   res.setHeader(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization"
-//   );
-//   //Quelles méthodes sont possibles
-//   res.setHeader(
-//     "Access-Control-Allow-Methods",
-//     "GET, POST, PUT, DELETE, PATCH, OPTIONS"
-//   );
-//   next();
-// });
 
 app.use((req, res, next) => {
   //Qui peut accéder à l'API

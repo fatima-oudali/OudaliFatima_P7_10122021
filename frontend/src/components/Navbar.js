@@ -3,10 +3,8 @@ import { NavLink } from "react-router-dom";
 //import GetOneUser from "./GetOneUser";
 import Logout from "./Log/Logout";
 
-//const pseudo = document.querySelector(".pseudo");
 const storage = localStorage.pseudo;
-//console.log(storage);
-//pseudo.innerHTML= "";
+
 
 const Navbar = () => {
   return (
