@@ -53,20 +53,8 @@ const Card = ({ post }) => {
             </div>
           </div>
         )}
-        {post.img && <img src={post.img} alt="card-pic" className="card-pic" />}
-
-        {/* {userId === post.id && (
-          <div className="button-container">
-            console.log(post.id);
-            <div onClick={() => setIsUpdated(true)}>
-            <img src="./img/icons/edit.svg" alt="edit"/>
-            <p>123456789</p>
-            </div>
-          </div>
-        )}  */}
-        
+        {post.img && <img src={post.img} alt="card-pic" className="card-pic" />}        
         {userId === post.id && (
-
         <div className="button-container">
           <div onClick={() => setIsUpdated(!isUpdated)}>
             <img src="./img/icons/edit.svg" alt="edit"/>
