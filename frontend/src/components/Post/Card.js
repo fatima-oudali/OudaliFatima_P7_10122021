@@ -2,15 +2,27 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Profil from "../User/Profil";
 
+
 const Card = ({ post }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [loadPost, setLoadPost] = useState([]);
   const [isUpdated, setIsUpdated] = useState(false);
   const [textUpdate, setTextUpdate] = useState(null);
-
-  const userId = localStorage.userId;
-
-  const updateItem = async () => {};
+  const [contenu, setContenu] = useState("");
+  
+  const userId = JSON.parse(localStorage.userId);
+  
+  const updateItem = () => {
+    if (textUpdate){
+        axios({
+          method: "put",
+          url: `${process.env.REACT_APP_API_URL}api/post/${post.id}`,
+          data: { contenu},
+        })
+          .catch((err) => console.log(err));
+  };
+  setIsUpdated(false)
+}
 
   useEffect(() => {
     axios({
@@ -40,7 +52,7 @@ const Card = ({ post }) => {
           <span>{post.date}</span>
         </div>
         {isUpdated === false && <p>{post.contenu}</p>}
-        {isUpdated && (
+        {isUpdated ? (
           <div className="update-post">
             <textarea
               defaultValue={post.contenu}
@@ -52,16 +64,16 @@ const Card = ({ post }) => {
               </button>
             </div>
           </div>
-        )}
-        {post.img && <img src={post.img} alt="card-pic" className="card-pic" />}        
-        {userId === post.id && (
+        ): null}
+        {post.img ? (<img src={post.img} alt="card-pic" className="card-pic" />) : null} 
+        
+        {userId === post.user_id ? (
         <div className="button-container">
           <div onClick={() => setIsUpdated(!isUpdated)}>
             <img src="./img/icons/edit.svg" alt="edit"/>
           </div>
         </div>
-        )}
-
+        ) : null}
         <div className="card-footer"></div>
       </div>
       </>
