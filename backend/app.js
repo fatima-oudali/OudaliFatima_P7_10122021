@@ -8,7 +8,7 @@ require("dotenv").config(); //importation pour l'utilisation des variables d'env
 const app = express(); //création d'une application Express
 
 const postRoutes = require('./routes/post');
-const commentRoutes =require('./routes/comment');
+const commentRoutes = require('./routes/comment');
 const userRoutes = require('./routes/user');
 
 var helmet = require('helmet');
@@ -39,7 +39,7 @@ app.use(bodyParser.json());
 //Gestion des routes principales
 app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/post', postRoutes);
-//app.use('/api/comment', commentRoutes);
+// app.use('/api/comment', commentRoutes);
 app.use('/api/auth', userRoutes);
 
 //on exporte l'application créée pour qu'on puisse y accéder depuis les autres fichiers de notre projet

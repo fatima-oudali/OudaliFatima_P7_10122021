@@ -18,8 +18,8 @@ exports.createPost = (req, res, next) => {
     req.file.filename}`
 
   db.query(
-    `INSERT INTO post (img, contenu, id) VALUES (?, ?, ${id})`,
-    [img, contenu, id],
+    `INSERT INTO post ( contenu, id) VALUES (?, ?, ${id})`,
+    [ contenu, id],
     (err, result) => {
       if (err) {
         console.log(err);
@@ -33,10 +33,10 @@ exports.createPost = (req, res, next) => {
 exports.modifyPost = (req, res, next) => {
   const id = req.params.id;
   const contenu = req.body.contenu;
-  const img = req.body.img;
+  // const img = req.body.img;
 
-  db.query(`UPDATE post SET img = ?, contenu = ? WHERE id = ${id}`, 
-  [img, contenu, id],
+  db.query(`UPDATE post SET  contenu = ? WHERE id = ${id}`, 
+  [contenu, id],
   (err, result) => {
       if (err) {
           console.log(err);
@@ -58,7 +58,7 @@ exports.deletePost = (req, res, next) => {
 };
 
 exports.getOnePost = (req, res, next) => {
- const id = req.body.id;
+ const id = req.params.id;
  db.query('SELECT * FROM post WHERE id = ?', id, (err, result) => {
     if (err) {
         console.log(err);

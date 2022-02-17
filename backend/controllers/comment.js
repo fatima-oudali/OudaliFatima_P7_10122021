@@ -11,9 +11,10 @@ exports.getAllComment = (req, res, next) => {
    
    exports.createComment = (req, res, next) => {
        const contenu = req.body.contenu;
+       const id = req.params.id;
    
-     db.query('INSERT INTO comment (contenu) VALUES ?',
-     [contenu],
+     db.query(`INSERT INTO comment (contenu, id) VALUES (?, ?, ${id})`,
+     [contenu, id],
      (err, result) => {
          if(err) {
              console.log(err);
@@ -25,10 +26,10 @@ exports.getAllComment = (req, res, next) => {
    };
    
    exports.modifyComment = (req, res, next) => {
-     const id = req.body.id;
+     const id = req.params.id;
      const contenu = req.body.contenu;
    
-     db.query('UPDATE comment SET contenu = ? WHERE id = ?', 
+     db.query(`UPDATE comment SET  contenu = ? WHERE id = ${id}`, 
      [contenu, id],
      (err, result) => {
          if (err) {
@@ -51,7 +52,7 @@ exports.getAllComment = (req, res, next) => {
    };
    
    exports.getOneComment = (req, res, next) => {
-    const id = req.body.id;
+    const id = req.params.id;
     db.query('SELECT * FROM comment WHERE id = ?', id, (err, result) => {
        if (err) {
            console.log(err);
