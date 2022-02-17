@@ -1,6 +1,5 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-//import GetOneUser from "./GetOneUser";
 import Logout from "./Log/Logout";
 
 const storage = localStorage.pseudo;

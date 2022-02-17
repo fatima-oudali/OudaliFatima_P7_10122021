@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Profiler } from "react";
 import axios from "axios";
-import Profil from "../User/Profil";
 import DeleteCard from "./DeleteCard";
 import CardComment from "../Comment/CardComment";
 import LikeButton from "./LikeButton";
+
 
 const Card = ({ post }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -11,8 +11,11 @@ const Card = ({ post }) => {
   const [isUpdated, setIsUpdated] = useState(false);
   const [textUpdate, setTextUpdate] = useState(null);
   const [showComments, setShowComments] = useState(false);
+  const [userParams, setUserParams] = useState([]);
+  const [text, setText] = useState([]);
 
   const userId = JSON.parse(localStorage.userId);
+ 
 
   const updateItem = () => {
     if (textUpdate) {
@@ -28,6 +31,15 @@ const Card = ({ post }) => {
   };
 
   useEffect(() => {
+
+    axios({
+      method: "get",
+      url: `${process.env.REACT_APP_API_URL}api/auth`,
+    })
+      .then(res => setUserParams(res.data))
+      .catch(err => console.log(err));
+
+
     axios({
       method: "get",
       url: `${process.env.REACT_APP_API_URL}api/post`,
@@ -36,6 +48,16 @@ const Card = ({ post }) => {
         setLoadPost(res.data);
       })
       .catch((err) => console.log(err));
+
+      axios({
+        method: "get",
+        url: `${process.env.REACT_APP_API_URL}api/comment`,
+      })
+        .then((res) => {
+          setText(res.data);
+          console.log(res.data);
+        })
+        .catch((err) => console.log(err));
   }, []);
 
   useEffect(() => {
@@ -48,10 +70,22 @@ const Card = ({ post }) => {
         <i className="fas fa-spinner fa-spin"></i>
       ) : (
         <>
-          <div className="card-left"></div>
+          <div className="card-left">
+          <img
+                src="./img/profil.png"
+                alt="user-pic"
+              />
+          </div>
           <div className="card-right">
             <div className="card-header">
-              <Profil post={post} />
+            <div>
+            {userParams.map((user) => {
+              const pseudo = user.pseudo;
+              if (user.id === post.user_id) return <h3>{pseudo}</h3>;
+            })}
+            </div>
+            
+            
               <span>{post.date}</span>
             </div>
             {isUpdated === false && <p>{post.contenu}</p>}
@@ -87,7 +121,7 @@ const Card = ({ post }) => {
                   src="./img/icons/message1.svg"
                   alt="comment"
                 />
-                <span></span>
+                <span>{setText.length}</span>
               </div>
               <LikeButton post={post} />
             </div>

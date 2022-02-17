@@ -39,7 +39,7 @@ app.use(bodyParser.json());
 //Gestion des routes principales
 app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/post', postRoutes);
-// app.use('/api/comment', commentRoutes);
+app.use('/api/comment', commentRoutes);
 app.use('/api/auth', userRoutes);
 
 //on exporte l'application créée pour qu'on puisse y accéder depuis les autres fichiers de notre projet

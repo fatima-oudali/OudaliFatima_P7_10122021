@@ -33,7 +33,7 @@ exports.createPost = (req, res, next) => {
 exports.modifyPost = (req, res, next) => {
   const id = req.params.id;
   const contenu = req.body.contenu;
-  // const img = req.body.img;
+  // const img = req.body.images;
 
   db.query(`UPDATE post SET  contenu = ? WHERE id = ${id}`, 
   [contenu, id],
