@@ -1,21 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
+import AddComment from "./AddComment";
 
 const CardComment = ({ post }) => {
-  const [text, setText] = useState([]);
   const [userParams, setUserParams] = useState([]);
+  const [comment, setComment] = useState([]);
 
   const userId = JSON.parse(localStorage.userId);
-
-  const handleComment = (e) => {
-    e.preventDefault();
-
-    if(text) {
-        
-    }
-    };
-    
+  
   useEffect(() => {
+
     axios({
       method: "get",
       url: `${process.env.REACT_APP_API_URL}api/auth`,
@@ -23,29 +17,27 @@ const CardComment = ({ post }) => {
       .then((res) => setUserParams(res.data))
       .catch((err) => console.log(err));
 
-    axios({
-      method: "get",
-      url: `${process.env.REACT_APP_API_URL}api/comment`,
-    })
-      .then((res) => {
-        setText(res.data);
-        console.log(res.data);
+      axios({
+        method: "get",
+        url: `${process.env.REACT_APP_API_URL}api/comment`,
       })
-      .catch((err) => console.log(err));
+        .then((res) => setComment(res.data))
+        .catch((err) => console.log(err));
+
   }, []);
 
   return (
     <div className="comments-container">
-      {text.map((comment) => {
-        return (
-          post.id === comment.post_id && (
+      {comment.map((text) => {
+        if (post.id === text.post_id)
+          return (
             <div
               className={
-                comment.user_id === userId
+                text.user_id === userId
                   ? "comment-container client"
                   : "comment-container"
               }
-              key={comment.id}
+              key={text.id}
             >
               <div className="left-part">
                 <img src="./img/profil.png" alt="commenter-pic" />
@@ -54,28 +46,22 @@ const CardComment = ({ post }) => {
                 <div className="comment-header">
                   <div className="pseudo">
                     {userParams.map((user) => {
-                      if (
-                        user.id === comment.user_id &&
-                        comment.post_id === post.id
-                      )
-                        return <h3>{user.pseudo}</h3>;
+                      const pseudo = user.pseudo;
+                      if (user.id === text.user_id) return <h3>{pseudo}</h3>;
                     })}
                   </div>
-                  <span>{comment.date}</span>
+                  <span>{text.date}</span>
+                  
                 </div>
-                <p>{comment.contenu}</p>
+                <p>{text.contenu}</p>
+                
               </div>
             </div>
-          )
-        );
-      })}
-      <form action="" onSubmit={handleComment} className="comment-form">
-          <input type="text" name="text" onChange={(e) => setText(e.target.value)} value={setText} placeholder="Laisser un commentaire" /> 
-          <input type="submit" value="Envoyer" />
-          <br/>
-      </form>
+          );
+        })}
+      <AddComment post={post} />
     </div>
-  );
+        );
 };
 
 export default CardComment;

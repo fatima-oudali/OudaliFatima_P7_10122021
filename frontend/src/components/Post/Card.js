@@ -1,8 +1,8 @@
-import React, { useState, useEffect, Profiler } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import DeleteCard from "./DeleteCard";
-import CardComment from "../Comment/CardComment";
 import LikeButton from "./LikeButton";
+import CardComment from "../Comment/CardComment";
 
 
 const Card = ({ post }) => {
@@ -73,7 +73,7 @@ const Card = ({ post }) => {
           <div className="card-left">
           <img
                 src="./img/profil.png"
-                alt="user-pic"
+                alt="poster-pic"
               />
           </div>
           <div className="card-right">
@@ -123,7 +123,7 @@ const Card = ({ post }) => {
                 />
                 <span>{setText.length}</span>
               </div>
-              <LikeButton post={post} />
+              {/* <LikeButton post={post} /> */}
             </div>
             {showComments && <CardComment post={post} />}
           </div>

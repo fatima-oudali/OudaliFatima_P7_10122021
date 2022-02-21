@@ -13,13 +13,16 @@ exports.getAllPost = (req, res, next) => {
 
 exports.createPost = (req, res, next) => {
   const contenu = req.body.contenu;
+  const user_id = req.body.user_id;
   const id = req.params.id;
-  const img =`${req.protocol}://${req.get("host")}/images/${
-    req.file.filename}`
+  // const user_id = req.params.user_id;
+  
+  // const img =`${req.protocol}://${req.get("host")}/images/${
+  //   req.file.filename}`
 
   db.query(
-    `INSERT INTO post ( contenu, id) VALUES (?, ?, ${id})`,
-    [ contenu, id],
+    `INSERT INTO post (contenu, user_id) VALUES (?, ?)`,
+    [ contenu, user_id],
     (err, result) => {
       if (err) {
         console.log(err);
