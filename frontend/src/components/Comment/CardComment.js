@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import AddComment from "./AddComment";
+import EditComment from "./EditComment";
+import { dateParser } from "../Utils";
 
 const CardComment = ({ post }) => {
   const [userParams, setUserParams] = useState([]);
@@ -50,16 +52,17 @@ const CardComment = ({ post }) => {
                       if (user.id === text.user_id) return <h3>{pseudo}</h3>;
                     })}
                   </div>
-                  <span>{text.date}</span>
+                  <span>{dateParser(text.date)}</span>
                   
                 </div>
                 <p>{text.contenu}</p>
-                
+                <EditComment comment={comment} />
               </div>
             </div>
           );
         })}
       <AddComment post={post} />
+
     </div>
         );
 };

@@ -3,8 +3,8 @@ import SignInForm from './SignInForm';
 import SignUpForm from './SignUpForm';
 
 const Log = () => {
-    const [signUpModal, setSignUpModal] = useState(true); //inscription
-    const [signInModal, setSignInModal] = useState(false); //connection
+    const [signUpModal, setSignUpModal] = useState(false); //inscription
+    const [signInModal, setSignInModal] = useState(true); //connection
 
     const handaleModals = (e) => {
         if(e.target.id === "inscription") {
@@ -20,8 +20,8 @@ const Log = () => {
         <div className="connection-form">
             <div className="form-container">
                 <ul>
-                    <li onClick={handaleModals} id="inscription" className={signUpModal ? "active-btn" : null} > S'inscrire </li>
                     <li onClick={handaleModals} id="connection" className={signInModal ? "active-btn" : null}> Se connecter </li>
+                    <li onClick={handaleModals} id="inscription" className={signUpModal ? "active-btn" : null} > S'inscrire </li>
                 </ul>
                 {signUpModal && <SignUpForm />} 
                 {signInModal && <SignInForm />} 

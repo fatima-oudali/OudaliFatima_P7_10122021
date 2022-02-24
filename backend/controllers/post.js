@@ -17,12 +17,12 @@ exports.createPost = (req, res, next) => {
   const id = req.params.id;
   // const user_id = req.params.user_id;
   
-  // const img =`${req.protocol}://${req.get("host")}/images/${
-  //   req.file.filename}`
+  image =`${req.protocol}://${req.get("host")}/images/${
+    req.file.filename}`
 
   db.query(
-    `INSERT INTO post (contenu, user_id) VALUES (?, ?)`,
-    [ contenu, user_id],
+    `INSERT INTO post (contenu, user_id) VALUES (?, ?, ?)`,
+    [ contenu, user_id, image],
     (err, result) => {
       if (err) {
         console.log(err);

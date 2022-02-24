@@ -11,23 +11,6 @@
     color: $color-3;
   }
 
-  .data {
-    position: absolute;
-    right: 42px;
-    text-align: right;
-
-    @media screen and(max-width: 420px) {
-      right: 10px;
-    }
-    @media screen and(max-width: 380px) {
-      display: none;
-    }
-
-    span {
-      font-weight: bold;
-    }
-  }
-
   .user-info {
     margin-bottom: 10px;
     img {

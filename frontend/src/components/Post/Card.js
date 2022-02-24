@@ -3,10 +3,10 @@ import axios from "axios";
 import DeleteCard from "./DeleteCard";
 import LikeButton from "./LikeButton";
 import CardComment from "../Comment/CardComment";
+import { dateParser } from "../Utils";
 
 
 const Card = ({ post }) => {
-  const [isLoading, setIsLoading] = useState(true);
   const [loadPost, setLoadPost] = useState([]);
   const [isUpdated, setIsUpdated] = useState(false);
   const [textUpdate, setTextUpdate] = useState(null);
@@ -28,6 +28,7 @@ const Card = ({ post }) => {
         .catch((err) => console.log(err));
     }
     setIsUpdated(false);
+    
   };
 
   useEffect(() => {
@@ -55,20 +56,13 @@ const Card = ({ post }) => {
       })
         .then((res) => {
           setText(res.data);
-          console.log(res.data);
         })
         .catch((err) => console.log(err));
   }, []);
 
-  useEffect(() => {
-    setIsLoading(false);
-  }, []);
-
+ 
   return (
     <li className="card-container" key={post.id}>
-      {isLoading ? (
-        <i className="fas fa-spinner fa-spin"></i>
-      ) : (
         <>
           <div className="card-left">
           <img
@@ -86,7 +80,7 @@ const Card = ({ post }) => {
             </div>
             
             
-              <span>{post.date}</span>
+              <span>{dateParser(post.date)}</span>
             </div>
             {isUpdated === false && <p>{post.contenu}</p>}
             {isUpdated ? (
@@ -125,10 +119,10 @@ const Card = ({ post }) => {
               </div>
               {/* <LikeButton post={post} /> */}
             </div>
-            {showComments && <CardComment post={post} />}
+            {showComments && <CardComment post={post}/>}
           </div>
         </>
-      )}
+
     </li>
   );
 };
