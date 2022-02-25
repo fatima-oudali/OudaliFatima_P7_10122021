@@ -1,5 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import Home from "./Home";
+import EditDeleteProfil from "./EditDeleteProfil";
 import Logout from "./Log/Logout";
 
 const storage = localStorage.pseudo;
@@ -13,17 +15,15 @@ const Navbar = () => {
           <NavLink exact to="/">
             <div className="logo">
               <img src="./img/logo.png" alt="logo" />
-              <h3>Groupomania</h3>
+              <h1>Groupomania</h1>
             </div>
           </NavLink>
         </div>
         <ul>
-          <li></li>
           <li className="welcome">
-            <NavLink exact to="/profil">
-              <h5> Bienvenue {storage} </h5>
-            </NavLink>
+              <h4> Bienvenue {storage} </h4>
           </li>
+          {(window.location.pathname) === "/user" ? (<Home />): (<EditDeleteProfil /> )}
           <Logout />
         </ul>
       </div>

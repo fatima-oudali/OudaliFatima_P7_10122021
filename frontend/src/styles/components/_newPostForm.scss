@@ -1,6 +1,7 @@
 .post-container {
   margin: 0 auto 0;
-  padding: 16px 40px;
+  // padding: 16px 40px;
+  padding: 40px;
   border-radius: 20px;
   position: relative;
   background: $color-4;
@@ -11,19 +12,19 @@
     color: $color-3;
   }
 
-  .user-info {
-    margin-bottom: 10px;
-    img {
-      border-radius: 20px;
-      height: 60px;
-      width: 60px;
-      box-shadow: 2px 2px 2px rgba(51, 51, 51, 0.16);
-      object-fit: cover;
-    }
-    h3 {
-      color: $black;
-    }
-  }
+  // .user-info {
+  //   margin-bottom: 10px;
+  //   img {
+  //     border-radius: 20px;
+  //     height: 60px;
+  //     width: 60px;
+  //     box-shadow: 2px 2px 2px rgba(51, 51, 51, 0.16);
+  //     object-fit: cover;
+  //   }
+  //   h3 {
+  //     color: $black;
+  //   }
+  // }
   .post-form {
     position: relative;
     margin: 0 auto 0;

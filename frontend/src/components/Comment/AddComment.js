@@ -6,12 +6,12 @@ const AddComment = ({ post }) => {
   const userId = JSON.parse(localStorage.userId);
   const postId = post.id;
 
-  const handleComment = (e) => {
+  const handleComment = async (e) => {
     
-    // e.preventDefault();
+    e.preventDefault();
     if (contenu) {
 
-            axios({
+          await axios({
                 method: "post",
                 url: `${process.env.REACT_APP_API_URL}api/comment`,
                 withCredentials: true,

@@ -96,9 +96,9 @@ const Card = ({ post }) => {
                 </div>
               </div>
             ) : null}
-            {/* {post.img ? (
-              <img src={post.img} alt="card-pic" className="card-pic" />
-            ) : null} */}
+            {post.image ? (
+              <img src={post.image} alt="card-pic" className="card-pic" />
+            ) : null}
 
             {userId === post.user_id ? (
               <div className="button-container">
@@ -115,11 +115,11 @@ const Card = ({ post }) => {
                   src="./img/icons/message1.svg"
                   alt="comment"
                 />
-                <span>{setText.length}</span>
+                {/* <span>{setText.length}</span> */}
               </div>
               {/* <LikeButton post={post} /> */}
             </div>
-            {showComments && <CardComment post={post}/>}
+            {showComments && <CardComment post={post} />}
           </div>
         </>
 

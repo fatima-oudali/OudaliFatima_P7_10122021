@@ -56,7 +56,7 @@ const CardComment = ({ post }) => {
                   
                 </div>
                 <p>{text.contenu}</p>
-                <EditComment comment={comment} />
+                <EditComment comment={text} />
               </div>
             </div>
           );

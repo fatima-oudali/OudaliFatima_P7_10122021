@@ -22,7 +22,7 @@ exports.signup = (req, res, next) => {
       db.query(
         "INSERT INTO user (pseudo, email, password) VALUES (?, ?, ?)",
         [pseudo, email, password],
-        (error, res) => {
+        (error) => {
           if (error) {
             res.status(400).json({ error });
           } else {

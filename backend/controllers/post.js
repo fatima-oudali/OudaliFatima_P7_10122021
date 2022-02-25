@@ -11,18 +11,22 @@ exports.getAllPost = (req, res, next) => {
  })
 };
 
+
 exports.createPost = (req, res, next) => {
   const contenu = req.body.contenu;
   const user_id = req.body.user_id;
   const id = req.params.id;
-  // const user_id = req.params.user_id;
   
-  image =`${req.protocol}://${req.get("host")}/images/${
-    req.file.filename}`
+
+  let image = null;
+
+  if (req.file) {
+    image = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
+  }
 
   db.query(
-    `INSERT INTO post (contenu, user_id) VALUES (?, ?, ?)`,
-    [ contenu, user_id, image],
+    `INSERT INTO post (contenu, user_id, image) VALUES (?, ?, ?)`,
+    [contenu, user_id, image],
     (err, result) => {
       if (err) {
         console.log(err);
@@ -38,6 +42,7 @@ exports.modifyPost = (req, res, next) => {
   const contenu = req.body.contenu;
   // const img = req.body.images;
 
+  
   db.query(`UPDATE post SET  contenu = ? WHERE id = ${id}`, 
   [contenu, id],
   (err, result) => {

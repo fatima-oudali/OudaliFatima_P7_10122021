@@ -4,9 +4,10 @@ import axios from "axios";
 const DeleteComment = ({comment}) => {
 
     const handleDeleteComment = () => {
+     
         axios({
           method: "DELETE",
-          url: `${process.env.REACT_APP_API_URL}api/post/${comment.id}`,
+          url: `${process.env.REACT_APP_API_URL}api/comment/${comment.id}`,
           withCredentials: true,
         })
           .then(() => window.location.reload())

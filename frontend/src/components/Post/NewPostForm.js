@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { NavLink } from "react-router-dom";
 import { timestampParser } from "../Utils";
 
 const NewPostForm = () => {
@@ -21,12 +20,12 @@ const NewPostForm = () => {
         method: "post",
         url: `${process.env.REACT_APP_API_URL}api/post`,
         withCredentials: true,
-        data: {data}
+        data,
       })
         .then(() => window.location.reload())
         .catch((err) => console.log(err));
-      alert("Veuillez entrer un message");
     }
+    alert("Veuillez entrer un message");
   };
 
   const handlePicture = (e) => {
@@ -42,11 +41,11 @@ const NewPostForm = () => {
 
   return (
     <div className="post-container">
-      <NavLink exact to="/profil">
+      {/* <NavLink exact to="/profil">
         <div className="user-info">
           <img src="./img/profil.png" alt="user-pic" />
         </div>
-      </NavLink>
+      </NavLink> */}
       <div className="post-form">
         <textarea
           name="message"
