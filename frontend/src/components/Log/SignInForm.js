@@ -28,6 +28,7 @@ const SignInForm = () => {
           window.location = "/";
           localStorage.setItem("userId", res.data.userId);
           localStorage.setItem("pseudo", res.data.pseudo);
+          localStorage.isAdmin = res.data.isAdmin;
           localStorage.setItem("token", res.data.token);
         }
       })

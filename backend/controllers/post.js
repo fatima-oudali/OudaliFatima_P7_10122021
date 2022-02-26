@@ -42,10 +42,15 @@ exports.modifyPost = (req, res, next) => {
   const contenu = req.body.contenu;
   // const img = req.body.images;
 
-  
+  let image = req.body.images;
+
+  if (req.file) {
+    image = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
+  }
+
   db.query(`UPDATE post SET  contenu = ? WHERE id = ${id}`, 
-  [contenu, id],
-  (err, result) => {
+  [contenu, id, image],
+  (err) => {
       if (err) {
           console.log(err);
       } else {
