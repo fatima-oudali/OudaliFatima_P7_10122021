@@ -1,6 +1,6 @@
 import React from 'react';
 
-const EditDeleteProfil = () => {
+const DeleteProfil = () => {
     const user = () => {
         window.location.href = "/user"
     }
@@ -8,4 +8,4 @@ const EditDeleteProfil = () => {
     return <li onClick={user}><img src="./img/icons/user.svg" alt="user" /></li>
 };
 
-export default EditDeleteProfil;
+export default DeleteProfil;

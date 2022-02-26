@@ -130,26 +130,30 @@
     //   grid-template-columns: 1fr;
     // }
 
-    > div {
+    // > div {
+      height: auto;
+      min-height: 550px;
       background: $color-4;
       border-radius: 25px;
       padding: 30px;
-      margin: 20px ;
+      margin: 30px ;
       display: flex;
       flex-direction: column;
+      justify-content: center;
       align-items: center;
       
      
         img {
-          height: 180px;
-          width: 180px;
+          height: 200px;
+          width: 200px;
           border-radius: 20px;
-          margin-bottom: 20px;
+          margin-bottom: 50px;
         }
         button {
-          border-radius: 20px;
-          height: 40px;
+          border-radius: 25px;
+          height: 50px;
           width: 300px;
+          font-size: 23px;
 
           // margin: 5px 0;
           // margin: 50px;
@@ -161,8 +165,7 @@
         margin: 10px 10px;
         
       }
-    }
- 
+    // }
   }
   .popup-profil-container {
     z-index: 100;

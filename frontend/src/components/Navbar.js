@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import Home from "./Home";
-import EditDeleteProfil from "./EditDeleteProfil";
+import DeleteProfil from "./DeleteProfil";
 import Logout from "./Log/Logout";
 
 const storage = localStorage.pseudo;
@@ -23,7 +23,7 @@ const Navbar = () => {
           <li className="welcome">
               <h4> Bienvenue {storage} </h4>
           </li>
-          {(window.location.pathname) === "/user" ? (<Home />): (<EditDeleteProfil /> )}
+          {(window.location.pathname) === "/user" ? (<Home />): (<DeleteProfil /> )}
           <Logout />
         </ul>
       </div>
