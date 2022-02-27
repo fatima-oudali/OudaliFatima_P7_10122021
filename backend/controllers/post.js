@@ -48,7 +48,7 @@ exports.modifyPost = (req, res, next) => {
     image = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
   }
 
-  db.query(`UPDATE post SET  contenu = ? WHERE id = ${id}`, 
+  db.query(`UPDATE post SET  (contenu, image) VALUES (?, ?) WHERE id = ${id}`, 
   [contenu, id, image],
   (err) => {
       if (err) {

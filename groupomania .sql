@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : lun. 21 fév. 2022 à 02:07
+-- Généré le : dim. 27 fév. 2022 à 22:27
 -- Version du serveur : 10.4.22-MariaDB
 -- Version de PHP : 8.0.13
 
@@ -40,29 +40,47 @@ CREATE TABLE `comment` (
 --
 
 INSERT INTO `comment` (`id`, `contenu`, `user_id`, `post_id`, `date`) VALUES
-(2, 'comment çava ?', 21, 5, '2022-02-17 21:11:39'),
 (3, 'Slt ', 28, 4, '2022-02-17 21:11:39'),
-(5, 'Hi !', 20, 6, '2022-02-17 21:11:39'),
-(27, 'Bonjour', 21, 5, '2022-02-19 17:18:22'),
-(28, 'Bonjour', 21, 5, '2022-02-19 17:18:26'),
-(29, 'comment çava', 21, 5, '2022-02-19 17:19:20'),
-(30, 'salut', 21, 5, '2022-02-21 00:48:12'),
-(31, 'cc', 21, 4, '2022-02-21 00:49:39'),
-(32, 'salutt', 21, 4, '2022-02-21 00:51:24'),
-(33, 'salutt', 21, 9, '2022-02-21 00:51:42'),
+(32, 'salut', 21, 4, '2022-02-21 00:51:24'),
 (34, 'hello', 21, 4, '2022-02-21 00:56:02'),
-(35, 'Hi', 21, 4, '2022-02-21 00:57:05'),
+(35, 'Hi !', 21, 4, '2022-02-21 00:57:05'),
 (36, 'slt', 21, 9, '2022-02-21 00:57:29'),
-(37, 'slt', 21, 9, '2022-02-21 00:57:32'),
-(38, 'slt', 21, 9, '2022-02-21 00:57:33'),
-(39, 'slt', 21, 9, '2022-02-21 00:57:35'),
-(40, 'slt', 21, 9, '2022-02-21 00:57:36'),
-(41, 'slt', 21, 9, '2022-02-21 00:57:36'),
-(42, 'slt', 21, 9, '2022-02-21 00:57:38'),
-(43, 'slt', 21, 9, '2022-02-21 00:57:38'),
 (44, 'slt', 21, 9, '2022-02-21 00:57:48'),
-(45, '...', 21, 5, '2022-02-21 01:02:05'),
-(46, 'cc', 21, 6, '2022-02-21 01:05:01');
+(55, '123', 21, 4, '2022-02-21 16:01:17'),
+(57, '123', 21, 9, '2022-02-21 16:09:18'),
+(58, '444', 21, 4, '2022-02-21 16:10:20'),
+(60, '555', 21, 4, '2022-02-21 16:12:45'),
+(61, '555', 21, 4, '2022-02-21 16:12:48'),
+(62, '555', 21, 4, '2022-02-21 16:12:49'),
+(64, '555', 21, 4, '2022-02-21 16:12:50'),
+(72, '222', 21, 4, '2022-02-21 16:48:12'),
+(75, '99', 21, 9, '2022-02-21 16:53:42'),
+(76, '00', 21, 4, '2022-02-21 16:55:16'),
+(77, '44', 21, 4, '2022-02-21 16:55:42'),
+(78, '88', 21, 4, '2022-02-21 16:56:30'),
+(79, ',', 21, 4, '2022-02-21 17:01:22'),
+(80, 'cc', 21, 4, '2022-02-21 17:09:03'),
+(81, 'cc', 21, 4, '2022-02-21 17:09:36'),
+(82, '44456', 21, 4, '2022-02-21 17:09:41'),
+(83, '44456', 21, 4, '2022-02-21 17:09:45'),
+(84, '77', 21, 4, '2022-02-21 17:10:04'),
+(87, '111', 21, 4, '2022-02-21 17:34:51'),
+(88, '48521256', 21, 4, '2022-02-21 17:35:24'),
+(89, '48521256', 21, 4, '2022-02-21 17:35:26'),
+(90, '888', 21, 4, '2022-02-21 17:38:34'),
+(91, '88', 21, 4, '2022-02-21 17:41:45'),
+(92, '88888', 21, 4, '2022-02-21 17:45:18'),
+(93, '77', 21, 4, '2022-02-21 17:50:54'),
+(94, 'kkhgf', 21, 4, '2022-02-21 18:12:06'),
+(95, '111', 21, 4, '2022-02-21 18:28:15'),
+(96, 'salutt', 21, 4, '2022-02-21 19:57:38'),
+(103, 'hello', 21, 9, '2022-02-21 22:29:40'),
+(104, '22', 21, 9, '2022-02-21 22:31:24'),
+(105, '22', 21, 9, '2022-02-21 22:31:27'),
+(106, '2222', 21, 9, '2022-02-21 22:31:32'),
+(107, '2222', 21, 9, '2022-02-21 22:31:33'),
+(108, 'hello !', 21, 9, '2022-02-21 22:31:55'),
+(115, 'èèèè.............', 21, 4, '2022-02-21 22:47:09');
 
 -- --------------------------------------------------------
 
@@ -74,18 +92,18 @@ CREATE TABLE `post` (
   `id` int(11) NOT NULL,
   `contenu` text NOT NULL,
   `user_id` int(11) NOT NULL,
-  `date` timestamp NOT NULL DEFAULT current_timestamp()
+  `date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `image` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `post`
 --
 
-INSERT INTO `post` (`id`, `contenu`, `user_id`, `date`) VALUES
-(4, 'Salut', 29, '2022-02-02 21:41:00'),
-(5, 'coucou cava ', 23, '2022-02-16 23:38:29'),
-(6, 'Hello ^_^', 21, '2022-02-17 15:55:32'),
-(9, 'Il fait beau aujourd\'hui !', 21, '2022-02-19 17:51:44');
+INSERT INTO `post` (`id`, `contenu`, `user_id`, `date`, `image`) VALUES
+(4, 'Salut', 29, '2022-02-02 21:41:00', NULL),
+(9, 'Il fait beau aujourd\'hui !', 21, '2022-02-19 17:51:44', NULL),
+(10, 'null', 21, '2022-02-24 15:36:12', 'http://localhost:3000/images/télécharger.jpg1645716972712.jpg');
 
 -- --------------------------------------------------------
 
@@ -97,20 +115,20 @@ CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `pseudo` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `password` varchar(255) NOT NULL
+  `password` varchar(255) NOT NULL,
+  `isAdmin` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `user`
 --
 
-INSERT INTO `user` (`id`, `pseudo`, `email`, `password`) VALUES
-(20, 'f', 'f@test.com', '$2b$10$yIcYXTUGE7pA2HbNt4cyA.AUPY2pW8buyRjxbhFsUKJHXbtLsQ6Wi'),
-(21, 'fatima', 'oud.tima@hotmail.com', '$2b$10$NgdnXX7CQEqZttAl3DxMg.WSd3A2C18QLgzPSXfcbde6fYbxSWpOm'),
-(23, 'test1', 'test1@test.com', '$2b$10$WbZEXwWDm4oE5pPzI7LVBewLIwNsADAuR8FYLqQhSc45b1vkUyDWG'),
-(26, 'test1', 'test11@test.com', '$2b$10$Y3IkwcIm4bP6L3FFYvpZIOYVR584VTFqjk0QHEWohQr1nWG3McnsW'),
-(28, 'timazar', 't@test.com', '$2b$10$5I4Ru4LQV3gIyW0GA.fCeuNYeijmMdu2AAIDxm.UqUjoVPeb60noO'),
-(29, 'zora', 'zora@test.com', '$2b$10$7/wPYia9KGGUoLnsEa2qw.oHd1UidzyDNYZAPcx.h8Ms3yM7C07FG');
+INSERT INTO `user` (`id`, `pseudo`, `email`, `password`, `isAdmin`) VALUES
+(21, 'fatima', 'oud.tima@hotmail.com', '$2b$10$NgdnXX7CQEqZttAl3DxMg.WSd3A2C18QLgzPSXfcbde6fYbxSWpOm', 0),
+(26, 'test1', 'test11@test.com', '$2b$10$Y3IkwcIm4bP6L3FFYvpZIOYVR584VTFqjk0QHEWohQr1nWG3McnsW', 0),
+(28, 'timazar', 't@test.com', '$2b$10$5I4Ru4LQV3gIyW0GA.fCeuNYeijmMdu2AAIDxm.UqUjoVPeb60noO', 0),
+(29, 'zora', 'zora@test.com', '$2b$10$7/wPYia9KGGUoLnsEa2qw.oHd1UidzyDNYZAPcx.h8Ms3yM7C07FG', 0),
+(31, 'test4', 'test4@test.com', '$2b$10$Bzm3ZNCxiWma1knz955syuIWuPdYfoDz8Vcvh2IMwfPxtpdQ6iFf.', 0);
 
 --
 -- Index pour les tables déchargées
@@ -146,19 +164,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour la table `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
 
 --
 -- AUTO_INCREMENT pour la table `post`
 --
 ALTER TABLE `post`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- Contraintes pour les tables déchargées

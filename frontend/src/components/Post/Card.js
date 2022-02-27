@@ -18,12 +18,12 @@ const Card = ({ post }) => {
   const userId = JSON.parse(localStorage.userId);
 
   const updateItem = () => {
-    if (textUpdate || postPicture) {
+    if (textUpdate) {
       const data = new FormData();
       data.append("user_id", userId);
-      data.append("contenu", text);
-      if (file) data.append("file", setFile);
-
+      data.append("contenu", textUpdate);
+      if (file) data.append("file", file);
+    
       axios({
         method: "put",
         url: `${process.env.REACT_APP_API_URL}api/post/${post.id}`,
@@ -65,7 +65,7 @@ const Card = ({ post }) => {
         setText(res.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [updateItem]);
 
   return (
     <li className="card-container" key={post.id}>
