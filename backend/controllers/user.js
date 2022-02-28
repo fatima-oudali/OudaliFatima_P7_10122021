@@ -36,10 +36,13 @@ exports.signup = (req, res, next) => {
 
 exports.login = (req, res, next) => {
   const email = req.body.email;
-  db.query("SELECT * FROM user WHERE email =?", [email], (err, result) => {
+  const userId = req.params.id;
+  db.query("SELECT * FROM user WHERE email =? ", [email], (err, result) => {
     if (err || !result.length) {
       return res.status(401).json({ error: { email: "Email non trouvé" } });
     }
+
+    
 
     const user = result[0];
     bcrypt.compare(req.body.password, user.password).then((valid) => {

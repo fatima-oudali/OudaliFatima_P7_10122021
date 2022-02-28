@@ -65,7 +65,7 @@ const Card = ({ post }) => {
         setText(res.data);
       })
       .catch((err) => console.log(err));
-  }, [updateItem]);
+  }, []);
 
   return (
     <li className="card-container" key={post.id}>
@@ -91,8 +91,15 @@ const Card = ({ post }) => {
                 defaultValue={post.contenu}
                 onChange={(e) => setTextUpdate(e.target.value)}
               />
+                  {post.image ? (
+                    <img src={post.image} alt="card-pic" className="card-pic" />
+                  ) : null}
+                  {/* <div className="footer-form">
+
+                  </div> */}
+
               <div className="button-container">
-                <div className="icon">
+                <div className="icon icon-img">
                   <img src="./img/icons/picture.svg" alt="img" />
                   <input
                     type="file"
@@ -107,9 +114,6 @@ const Card = ({ post }) => {
                 </button>
               </div>
             </div>
-          ) : null}
-          {post.image ? (
-            <img src={post.image} alt="card-pic" className="card-pic" />
           ) : null}
 
           {userId === post.user_id ? (

@@ -139,6 +139,21 @@
             letter-spacing: 1px;
           }
         }
+        .icon-img {
+          padding: 7px 10px;
+        }
+        input {
+          width: 25px;
+          height: 25px;
+          position: absolute;
+          transform: translate(-16px, -3px);
+          opacity: 0;
+          cursor: pointer;
+
+          &::-webkit-file-upload-button {
+            cursor: pointer;
+          }
+        }
       }
     }
     .card-pic {

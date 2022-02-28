@@ -15,12 +15,12 @@ $font-1: "font-1", sans-serif;
 $font-2: "font-2", serif;
 $font-3: "font-3", serif;
 
-$color-1: #ff7b77;
-$color-2: #ffd0c4;
+// $color-1: #ff7b77;
+// $color-2: #ffd0c4;
 $color-3: rgb(0, 22, 44);
-$color-4: #fdeeee;
-//$color-5: #68c8d5;
-//$color-6: #ef5e6a;
+$color-4: #f7c4c4;
+$color-1: #03a8b4a6;
+$color-2: #e67c85e5;
 $black: rgb(40, 40, 40);
 $white: rgb(253, 253, 253);
 $shadow: rgb(219, 218, 218);
@@ -67,6 +67,7 @@ input[type="submit"] {
   padding: 10px 20px;
   cursor: pointer;
   font-size: 1.1rem;
+  font-weight: bold;
   border-radius: 20px 6px 20px 20px;
 
   &:hover {
