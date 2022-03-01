@@ -17,10 +17,11 @@ const Card = ({ post, isAdmin }) => {
   const userId = JSON.parse(localStorage.userId);
 
   const updateItem = () => {
+    const data = new FormData();
+    data.append("user_id", userId);
     if (textUpdate) {
-      const data = new FormData();
-      data.append("user_id", userId);
       data.append("contenu", textUpdate);
+    }
       if (file) data.append("file", file);
     
       axios({
@@ -31,7 +32,6 @@ const Card = ({ post, isAdmin }) => {
       })
         .then(() => window.location.reload())
         .catch((err) => console.log(err));
-    }
   };
 
   const handlePicture = (e) => {
