@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Card from "./Post/Card";
 
-const Thread = () => {
+const Thread = ({isAdmin}) => {
   const [loadPost, setLoadPost] = useState([]);
   
   useEffect(() => {
@@ -17,7 +17,7 @@ const Thread = () => {
     <div className="thread-container">
       <ul>
         {loadPost.map((post) => {
-          return <Card post={post} key={post.id} />;
+          return <Card post={post} key={post.id}  isAdmin={isAdmin} />;
         })}
       </ul>
     </div>

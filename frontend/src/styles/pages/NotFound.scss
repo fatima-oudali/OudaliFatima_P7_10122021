@@ -1,0 +1,42 @@
+// body {
+    // margin: 0;
+    // padding: 0;
+    // font-family: $font-1;
+    // min-height: 100vh;
+    // background-color: $color-3;
+    // line-height: 120px;
+    .container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+    padding: 0;
+    font-family: $font-1;
+    min-height: 100vh;
+    background-color: $color-3;
+    line-height: 130px;
+        font-size: 30px;
+        width: 100%;
+        position: absolute;
+        top:50%;
+        transform: translateY(-50%);
+        // text-align: center;
+        color: $color-2;
+        h1 {
+            font-size: 160px;
+            margin: 0;
+            font-weight: 900;
+            letter-spacing: 20px;
+        }
+        button {
+            color: $color-3 ;
+            border-radius: 25px;
+            &:hover {
+                background-color: $color-3 ;
+                color:$color-2 ;
+            }
+        }
+    }
+// }
+

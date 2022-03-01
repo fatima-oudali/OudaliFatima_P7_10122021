@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import DeleteCard from "./DeleteCard";
-import LikeButton from "./LikeButton";
 import CardComment from "../Comment/CardComment";
 import { dateParser } from "../Utils";
 
-const Card = ({ post }) => {
+const Card = ({ post, isAdmin }) => {
   const [loadPost, setLoadPost] = useState([]);
   const [isUpdated, setIsUpdated] = useState(false);
   const [textUpdate, setTextUpdate] = useState(null);
@@ -85,19 +84,15 @@ const Card = ({ post }) => {
             <span>{dateParser(post.date)}</span>
           </div>
           {isUpdated === false && <p>{post.contenu}</p>}
+          {post.image ? (
+                    <img src={post.image} alt="card-pic" className="card-pic" />
+                  ) : null}
           {isUpdated ? (
             <div className="update-post">
               <textarea
                 defaultValue={post.contenu}
                 onChange={(e) => setTextUpdate(e.target.value)}
               />
-                  {post.image ? (
-                    <img src={post.image} alt="card-pic" className="card-pic" />
-                  ) : null}
-                  {/* <div className="footer-form">
-
-                  </div> */}
-
               <div className="button-container">
                 <div className="icon icon-img">
                   <img src="./img/icons/picture.svg" alt="img" />
@@ -115,8 +110,11 @@ const Card = ({ post }) => {
               </div>
             </div>
           ) : null}
+           {/* {post.image ? (
+                    <img src={post.image} alt="card-pic" className="card-pic" />
+                  ) : null} */}
 
-          {userId === post.user_id ? (
+          {isAdmin || userId === post.user_id ? (
             <div className="button-container">
               <div onClick={() => setIsUpdated(!isUpdated)}>
                 <img src="./img/icons/edit.svg" alt="edit" />
@@ -132,7 +130,6 @@ const Card = ({ post }) => {
                 alt="comment"
               />
             </div>
-            {/* <LikeButton post={post} /> */}
           </div>
           {showComments && <CardComment post={post} />}
         </div>

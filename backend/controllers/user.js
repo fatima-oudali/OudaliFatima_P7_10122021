@@ -55,7 +55,7 @@ exports.login = (req, res, next) => {
         userId: user.id,
         pseudo: user.pseudo,
         isAdmin: user.isAdmin,
-        token: jwt.sign({ userId: user.id }, `${process.env.JWT_SECRET}`, {
+        token: jwt.sign({ userId: user.id, isAdmin: user.isAdmin }, `${process.env.JWT_SECRET}`, {
           expiresIn: "24h",
         }),
       });

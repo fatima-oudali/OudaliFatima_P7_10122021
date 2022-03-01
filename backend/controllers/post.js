@@ -37,26 +37,31 @@ exports.createPost = (req, res, next) => {
   );
 };
 
+
 exports.modifyPost = (req, res, next) => {
   const id = req.params.id;
+  let query;
   const contenu = req.body.contenu;
-  // const img = req.body.images;
-
-  let image = req.body.images;
 
   if (req.file) {
     image = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
   }
 
-  db.query(`UPDATE post SET  (contenu, image) VALUES (?, ?) WHERE id = ${id}`, 
-  [contenu, id, image],
-  (err) => {
-      if (err) {
-          console.log(err);
-      } else {
-        res.status(200).json({ message: "post modifié !" });
-      }
-  })
+  if (contenu && image) {
+    query = `UPDATE post SET contenu = '${contenu}', image = '${image}' WHERE id = ${id}`;
+  } else if (contenu && !image) {
+    query = `UPDATE post SET contenu = '${contenu}' WHERE id = ${id}`;
+  } else if (!contenu && image) {
+    query = `UPDATE post SET image = '${image}' WHERE id = ${id}`;
+  }
+
+  db.query(query, (err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.status(200).json({ message: "post modifié !" });
+    }
+  });
 };
 
 exports.deletePost = (req, res, next) => {
