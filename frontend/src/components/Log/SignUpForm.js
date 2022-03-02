@@ -21,10 +21,15 @@ const SignUpForm = () => {
     );
     const termsError = document.querySelector(".terms.error");
     
+    pseudoError.innerHTML="";
     emailError.innerHTML="";
     passwordError.innerHTML="";
     passwordConfirmError.innerHTML = "";
     termsError.innerHTML = "";
+
+    if (!pseudo) {
+      pseudoError.innerHTML ="Veuillez saisir un pseudo"
+    }
 
     if (!email) {
       emailError.innerHTML ="Veuillez saisir une adresse mail"
