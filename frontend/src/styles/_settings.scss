@@ -17,7 +17,8 @@ $font-3: "font-3", serif;
 
 // $color-1: #ff7b77;
 // $color-2: #ffd0c4;
-$color-3: rgb(0, 22, 44);
+// $color-3: #00162c;
+$color-3: #122a42;
 $color-4: #f7c4c4;
 $color-1: #03a8b4a6;
 $color-2: #e67c85e5;
@@ -33,7 +34,7 @@ $shadow: rgb(219, 218, 218);
   outline: none;
   border: none;
   text-decoration: none;
-  
+ 
 
   &::selection {
     background: $color-1;
@@ -59,7 +60,7 @@ textarea {
 button,
 input[type="submit"] {
   background: $color-2;
-  color: $color-1;
+  color: $color-3;
   font-family: $font-3;
   cursor: pointer;
   transition: 0.2s;
@@ -71,7 +72,7 @@ input[type="submit"] {
   border-radius: 20px 6px 20px 20px;
 
   &:hover {
-    background: $color-1;
+    background: $color-3;
     color: $color-2;
   }
 }

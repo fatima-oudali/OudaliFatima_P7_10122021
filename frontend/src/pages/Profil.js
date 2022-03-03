@@ -5,10 +5,10 @@ const Profil = () => {
   return (
     <div className="profil-page">
       <div className="log-container">
-        <Log />
         <div className="img-container">
-          <img src="./img/login.jpg" alt="" />
+          <img src="./img/groupomania.png" alt="groupomania" />
         </div>
+        <Log />
       </div>
     </div>
   );
