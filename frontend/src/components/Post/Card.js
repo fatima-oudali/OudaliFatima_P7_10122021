@@ -64,7 +64,11 @@ const Card = ({ post, isAdmin }) => {
         setText(res.data);
       })
       .catch((err) => console.log(err));
+
+      
   }, []);
+
+
 
   return (
     <li className="card-container" key={post.id}>

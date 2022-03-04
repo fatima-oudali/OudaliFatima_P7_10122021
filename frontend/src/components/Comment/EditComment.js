@@ -8,7 +8,7 @@ const EditComment = ({ comment }) => {
   const userId = JSON.parse(localStorage.userId);
 
   const handleEdit = (e) => {
-    // e.preventDefault();
+    e.preventDefault();
 
     if (text) {
       axios({
@@ -19,25 +19,8 @@ const EditComment = ({ comment }) => {
         // .then(() => window.location.reload())
         .catch((err) => console.log(err));
     }
+    setEdit(false);
   };
-
-  // useEffect(() => {
-
-    // axios({
-    //   method: "get",
-    //   url: `${process.env.REACT_APP_API_URL}api/auth`,
-    // })
-    //   .then((res) => setUserParams(res.data))
-    //   .catch((err) => console.log(err));
-
-      // axios({
-      //   method: "get",
-      //   url: `${process.env.REACT_APP_API_URL}api/comment`,
-      // })
-      //   .then((res) => setText(res.data))
-      //   .catch((err) => console.log(err));
-
-  // }, [setText]);
 
   return (
     <div className="edit-comment">

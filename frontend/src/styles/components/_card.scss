@@ -47,7 +47,7 @@
 
   .card-right {
     @media screen and(max-width: 590px) {
-      // margin-left: 18px;
+      margin-left: 18px;
     }
     .card-header {
       display: flex;
@@ -134,7 +134,7 @@
           transform: translateY(-3px);
 
           &:hover {
-            background: $color-1;
+            background: $color-3;
             width: 250px;
             letter-spacing: 1px;
           }

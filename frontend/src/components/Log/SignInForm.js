@@ -20,15 +20,19 @@ const SignInForm = () => {
       },
     })
       .then((res) => {
-        console.log(res.data);
-        if (res.data.error) {
-          emailError.innerHTML = res.data.error.email;
-          passwordError.innerHTML = res.data.error.password;
+        if(res.data.error){
+          if (res.data.error.email) {
+            emailError.innerHTML = res.data.error.email;
+            passwordError.innerHTML = "";
+          }else if (res.data.error.password) {
+            emailError.innerHTML = "";
+            passwordError.innerHTML = res.data.error.password;
+          }
         } else {
           window.location = "/";
           localStorage.setItem("userId", res.data.userId);
           localStorage.setItem("pseudo", res.data.pseudo);
-          localStorage.isAdmin= res.data.isAdmin;
+          localStorage.setItem("isAdmin", res.data.isAdmin);
           localStorage.setItem("token", res.data.token);
         }
       })

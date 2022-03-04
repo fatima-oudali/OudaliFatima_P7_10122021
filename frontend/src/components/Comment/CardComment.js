@@ -26,7 +26,7 @@ const CardComment = ({ post }) => {
         .then((res) => setComment(res.data))
         .catch((err) => console.log(err));
 
-  }, []);
+  }, [comment]);
 
   return (
     <div className="comments-container">

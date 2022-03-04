@@ -10,11 +10,13 @@ const NewPostForm = () => {
   const userId = JSON.parse(localStorage.userId);
 
   const handlePost = async () => {
-    if (message || postPicture) {
+    if (!message && !postPicture) {
+      alert("Veuillez entrer un message");
+    } else {
       const data = new FormData();
       data.append("user_id", userId);
       data.append("contenu", message);
-      if (file) data.append("file", file)
+      if (file) data.append("file", file);
 
       await axios({
         method: "post",
@@ -25,7 +27,6 @@ const NewPostForm = () => {
         .then(() => window.location.reload())
         .catch((err) => console.log(err));
     }
-    alert("Veuillez entrer un message");
   };
 
   const handlePicture = (e) => {
@@ -41,11 +42,6 @@ const NewPostForm = () => {
 
   return (
     <div className="post-container">
-      {/* <NavLink exact to="/profil">
-        <div className="user-info">
-          <img src="./img/profil.png" alt="user-pic" />
-        </div>
-      </NavLink> */}
       <div className="post-form">
         <textarea
           name="message"

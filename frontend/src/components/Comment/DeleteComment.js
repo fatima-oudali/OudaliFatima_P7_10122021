@@ -10,7 +10,7 @@ const DeleteComment = ({comment}) => {
           url: `${process.env.REACT_APP_API_URL}api/comment/${comment.id}`,
           withCredentials: true,
         })
-          .then(() => window.location.reload())
+          // .then(() => window.location.reload())
           .catch((err) => console.log(err));
       };
 

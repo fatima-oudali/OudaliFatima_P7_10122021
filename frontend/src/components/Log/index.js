@@ -3,8 +3,8 @@ import SignInForm from './SignInForm';
 import SignUpForm from './SignUpForm';
 
 const Log = () => {
-    const [signUpModal, setSignUpModal] = useState(false); //inscription
     const [signInModal, setSignInModal] = useState(true); //connection
+    const [signUpModal, setSignUpModal] = useState(false); //inscription
 
     const handaleModals = (e) => {
         if(e.target.id === "inscription") {
