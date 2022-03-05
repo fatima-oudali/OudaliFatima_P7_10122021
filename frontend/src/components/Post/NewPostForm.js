@@ -10,7 +10,7 @@ const NewPostForm = () => {
   const userId = JSON.parse(localStorage.userId);
 
   const handlePost = async () => {
-    if (!message && !postPicture) {
+      if (!message && !postPicture) {
       alert("Veuillez entrer un message");
     } else {
       const data = new FormData();
@@ -27,7 +27,8 @@ const NewPostForm = () => {
         .then(() => window.location.reload())
         .catch((err) => console.log(err));
     }
-  };
+    // setMessage("");
+  }; 
 
   const handlePicture = (e) => {
     setPostPicture(URL.createObjectURL(e.target.files[0]));

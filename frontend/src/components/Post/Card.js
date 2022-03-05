@@ -13,31 +13,36 @@ const Card = ({ post, isAdmin }) => {
   const [postPicture, setPostPicture] = useState(null);
   const [text, setText] = useState([]);
   const [file, setFile] = useState("");
+  const [pic, setPic] = useState("true");
 
   const userId = JSON.parse(localStorage.userId);
 
   const updateItem = () => {
+    console.log(pic);
     const data = new FormData();
     data.append("user_id", userId);
     if (textUpdate) {
       data.append("contenu", textUpdate);
     }
-      if (file) data.append("file", file);
-    
-      axios({
-        method: "put",
-        url: `${process.env.REACT_APP_API_URL}api/post/${post.id}`,
-        withCredentials: true,
-        data,
-      })
-        .then(() => window.location.reload())
-        .catch((err) => console.log(err));
+    if (file) data.append("file", file);
+    if (pic === false) data.append("file", null);
+
+    axios({
+      method: "put",
+      url: `${process.env.REACT_APP_API_URL}api/post/${post.id}`,
+      withCredentials: true,
+      data,
+    })
+      .then(() => window.location.reload())
+      .catch((err) => console.log(err));
   };
 
   const handlePicture = (e) => {
     setPostPicture(URL.createObjectURL(e.target.files[0]));
     setFile(e.target.files[0]);
   };
+
+  const handleDeletePicture = () => {};
 
   useEffect(() => {
     axios({
@@ -64,11 +69,7 @@ const Card = ({ post, isAdmin }) => {
         setText(res.data);
       })
       .catch((err) => console.log(err));
-
-      
   }, []);
-
-
 
   return (
     <li className="card-container" key={post.id}>
@@ -78,19 +79,24 @@ const Card = ({ post, isAdmin }) => {
         </div>
         <div className="card-right">
           <div className="card-header">
-            <div>
-              {userParams.map((user) => {
-                const pseudo = user.pseudo;
-                if (user.id === post.user_id) return <h3>{pseudo}</h3>;
-              })}
-            </div>
-
+            {userParams.map((user) => {
+              const pseudo = user.pseudo;
+              if (user.id === post.user_id) return <h3>{pseudo}</h3>;
+            })}
             <span>{dateParser(post.date)}</span>
           </div>
           {isUpdated === false && <p>{post.contenu}</p>}
-          {post.image ? (
-                    <img src={post.image} alt="card-pic" className="card-pic" />
-                  ) : null}
+          {post.image && isUpdated === false ? (
+            <img src={post.image} alt="card-pic" className="card-pic" />
+          ) : null}
+          {post.image && pic && isUpdated ? (
+            <div className="delete-card-pic">
+              {<img src={post.image} alt="card-pic" className="card-pic" />}
+              <div onClick={() => setPic(!pic)} className="delete-icon">
+                <img src="./img/icons/croix.svg" alt="croix" />
+              </div>
+            </div>
+          ) : null}
           {isUpdated ? (
             <div className="update-post">
               <textarea
@@ -114,7 +120,7 @@ const Card = ({ post, isAdmin }) => {
               </div>
             </div>
           ) : null}
-           {/* {post.image ? (
+          {/* {post.image ? (
                     <img src={post.image} alt="card-pic" className="card-pic" />
                   ) : null} */}
 
@@ -127,13 +133,13 @@ const Card = ({ post, isAdmin }) => {
             </div>
           ) : null}
           <div className="card-footer">
-            <div className="comment-icon">
-              <img
-                onClick={() => setShowComments(!showComments)}
-                src="./img/icons/message1.svg"
-                alt="comment"
-              />
-            </div>
+            <img
+              onClick={() => setShowComments(!showComments)}
+              src="./img/icons/message1.svg"
+              alt="comment"
+            />
+            {/* <div className="comment-icon">
+            </div> */}
           </div>
           {showComments && <CardComment post={post} />}
         </div>

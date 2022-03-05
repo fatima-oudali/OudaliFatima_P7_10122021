@@ -8,14 +8,14 @@ const DeleteCard = ({post}) => {
       url: `${process.env.REACT_APP_API_URL}api/post/${post.id}`,
       withCredentials: true,
     })
-      .then(() => window.location.reload())
+      .then(() =>window.location.reload())
       .catch((err) => console.log(err));
-  };
-
-  return (
-    <div
+    }
+    
+    return (
+      <div
       onClick={() => {
-        if (window.confirm("Voulez-vous vraiment supprimer cet article ?")) {
+        if (window.confirm("Voulez-vous supprimer cet article ?")) {
           deleteQuote();
         }
       }}

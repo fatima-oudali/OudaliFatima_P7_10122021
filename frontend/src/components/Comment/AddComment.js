@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 const AddComment = ({ post }) => {
   const [contenu, setContenu] = useState("");
@@ -21,35 +21,17 @@ const AddComment = ({ post }) => {
                     post_id: postId
                 },
             })
-            // .then(() => window.location.reload())
-            // .catch((err) => console.log(err));
-    }
+    } 
+    setContenu("");
   };
 
-  // const getComment = () => {
-  //   axios({
-  //     method: "get",
-  //     url: `${process.env.REACT_APP_API_URL}api/comment`,
-  //   })
-  //     .then((res) => {
-  //       setContenu(res.data);
-  //       console.log(res.data);
-  //     })
-  //     .catch((err) => console.log(err));
-  // }
-
-   
-
-
   return (
-    // <form action="" onSubmit={handleComment} className="comment-form">
-    <form action="" className="comment-form">
+    <form action=""  className="comment-form">
       <input
         type="text"
         name="contenu"
         onChange={(e) => {
           setContenu(e.target.value);
-          console.log(contenu)
         }}
         value= {contenu}
         placeholder="Laisser un commentaire..."
