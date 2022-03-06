@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import DeleteComment from "./DeleteComment";
 
-const EditComment = ({ comment }) => {
+const EditComment = ({ comment, isAdmin }) => {
   const [edit, setEdit] = useState(false);
   const [text, setText] = useState("");
   const userId = JSON.parse(localStorage.userId);
@@ -16,7 +16,6 @@ const EditComment = ({ comment }) => {
         url: `${process.env.REACT_APP_API_URL}api/comment/${comment.id}`,
         data: { contenu: text },
       })
-        // .then(() => window.location.reload())
         .catch((err) => console.log(err));
     }
     setEdit(false);
@@ -40,7 +39,7 @@ const EditComment = ({ comment }) => {
           <input type="submit" value="Valider modification" />
         </form>
       ) : null}
-      {userId === comment.user_id ? (
+      {isAdmin || userId === comment.user_id ? (
         <div className="btn">
           <span onClick={() => setEdit(!edit)}>
             <img src="./img/icons/edit.svg" alt="edit" />

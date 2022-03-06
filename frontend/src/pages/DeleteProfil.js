@@ -40,7 +40,7 @@ const DeleteProfil = () => {
                 onClick={() => {
                   if (
                     window.confirm(
-                      "Voulez-vous vraiment supprimer votre profil ?"
+                      "Attention toutes vos données seront supprimées. Cette action est irréversible !"
                     )
                   ) {
                     handleDelete();

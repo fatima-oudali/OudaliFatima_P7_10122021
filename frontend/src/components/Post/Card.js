@@ -18,14 +18,14 @@ const Card = ({ post, isAdmin }) => {
   const userId = JSON.parse(localStorage.userId);
 
   const updateItem = () => {
-    console.log(pic);
+
     const data = new FormData();
     data.append("user_id", userId);
     if (textUpdate) {
       data.append("contenu", textUpdate);
     }
     if (file) data.append("file", file);
-    if (pic === false) data.append("file", null);
+    console.log(pic);
 
     axios({
       method: "put",
@@ -35,6 +35,21 @@ const Card = ({ post, isAdmin }) => {
     })
       .then(() => window.location.reload())
       .catch((err) => console.log(err));
+
+    if (pic === false) 
+      {data.append("file", "")
+      
+      axios({
+        method: "DELETE",
+        url: `${process.env.REACT_APP_API_URL}api/post/${post.id}/${file}`,
+        withCredentials: true,
+      })
+      .then(() => window.location.reload())
+      .catch((err) => console.log(err));
+  
+    }
+
+
   };
 
   const handlePicture = (e) => {
@@ -42,7 +57,21 @@ const Card = ({ post, isAdmin }) => {
     setFile(e.target.files[0]);
   };
 
-  const handleDeletePicture = () => {};
+  // const handleDeletePicture = () => {
+  //   if (pic === false) {
+  //     new FormData().append("file", "");
+
+  //     axios({
+  //       method: "DELETE",
+  //       url: `${process.env.REACT_APP_API_URL}api/post/${post.id}/${post.image}`,
+  //       withCredentials: true,
+  //     })
+  //       .then(() => {window.location.reload();
+  //       console.log(post)})
+  //       .catch((err) => console.log(err));
+  //   }
+
+  // };
 
   useEffect(() => {
     axios({
@@ -92,7 +121,7 @@ const Card = ({ post, isAdmin }) => {
           {post.image && pic && isUpdated ? (
             <div className="delete-card-pic">
               {<img src={post.image} alt="card-pic" className="card-pic" />}
-              <div onClick={() => setPic(!pic)} className="delete-icon">
+              <div onClick={() => {setPic(!pic)}} className="delete-icon">
                 <img src="./img/icons/croix.svg" alt="croix" />
               </div>
             </div>
@@ -120,10 +149,6 @@ const Card = ({ post, isAdmin }) => {
               </div>
             </div>
           ) : null}
-          {/* {post.image ? (
-                    <img src={post.image} alt="card-pic" className="card-pic" />
-                  ) : null} */}
-
           {isAdmin || userId === post.user_id ? (
             <div className="button-container">
               <div onClick={() => setIsUpdated(!isUpdated)}>
@@ -138,10 +163,8 @@ const Card = ({ post, isAdmin }) => {
               src="./img/icons/message1.svg"
               alt="comment"
             />
-            {/* <div className="comment-icon">
-            </div> */}
           </div>
-          {showComments && <CardComment post={post} />}
+          {showComments && <CardComment post={post} isAdmin={isAdmin}/>}
         </div>
       </>
     </li>

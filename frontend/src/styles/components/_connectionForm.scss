@@ -1,5 +1,5 @@
 .connection-from {
-  border: 2px solid $color-1;
+  border: 2px solid $color-3;
   width: 400px;
   margin: 35px auto 0;
   padding: 20px 0;
@@ -26,12 +26,12 @@
       box-shadow: 3px 3px 1px rgba(51, 51, 51, 0.418);
 
       &:hover {
-        background: $color-1;
+        background: $color-3;
       }
     }
   }
   .active-btn {
-    background: $color-1;
+    background: $color-3;
   }
   form {
     width: 400px;

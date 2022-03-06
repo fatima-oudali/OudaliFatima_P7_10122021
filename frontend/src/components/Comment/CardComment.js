@@ -4,7 +4,7 @@ import AddComment from "./AddComment";
 import EditComment from "./EditComment";
 import { dateParser } from "../Utils";
 
-const CardComment = ({ post }) => {
+const CardComment = ({ post, isAdmin }) => {
   const [userParams, setUserParams] = useState([]);
   const [comment, setComment] = useState([]);
 
@@ -56,7 +56,7 @@ const CardComment = ({ post }) => {
                   
                 </div>
                 <p>{text.contenu}</p>
-                <EditComment comment={text} />
+                <EditComment comment={text} isAdmin={isAdmin}/>
               </div>
             </div>
           );

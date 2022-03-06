@@ -100,6 +100,23 @@ exports.deletePost = (req, res, next) => {
     })
   };
 
+  exports.deleteImage = (req, res, next) => {
+    const id = req.params.id;
+    let image = req.file;
+    
+    db.query('SELECT * FROM post WHERE id =?', [id], (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        if(result[0].image !== null) {
+          const filename = result[0].image.split("/images/")[1];
+          fs.unlink(`images/${filename}`, (error) => console.log(error))
+        }
+      }
+    })
+
+  }
+
 exports.getOnePost = (req, res, next) => {
  const id = req.params.id;
  db.query('SELECT * FROM post WHERE id = ?', id, (err, result) => {
