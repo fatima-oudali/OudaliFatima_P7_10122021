@@ -3,6 +3,7 @@ import axios from "axios";
 import AddComment from "./AddComment";
 import EditComment from "./EditComment";
 import { dateParser } from "../Utils";
+import DeleteComment from "./DeleteComment";
 
 const CardComment = ({ post, isAdmin }) => {
   const [userParams, setUserParams] = useState([]);
@@ -56,7 +57,11 @@ const CardComment = ({ post, isAdmin }) => {
                   
                 </div>
                 <p>{text.contenu}</p>
+                <div className="btn">
                 <EditComment comment={text} isAdmin={isAdmin}/>
+                <DeleteComment comment={text} isAdmin={isAdmin}/>
+                </div>
+                  
               </div>
             </div>
           );

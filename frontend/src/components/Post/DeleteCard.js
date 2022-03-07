@@ -1,7 +1,9 @@
 import axios from "axios";
 import React from "react";
 
-const DeleteCard = ({post}) => {
+const DeleteCard = ({post, isAdmin}) => {
+  const userId = JSON.parse(localStorage.userId);
+
   const deleteQuote = () => {
     axios({
       method: "DELETE",
@@ -12,15 +14,23 @@ const DeleteCard = ({post}) => {
       .catch((err) => console.log(err));
     }
     
-    return (
-      <div
-      onClick={() => {
-        if (window.confirm("Voulez-vous supprimer cet article ?")) {
-          deleteQuote();
-        }
-      }}
-    >
+    return ( 
+      <div className="button-container">
+
+      {isAdmin || userId === post.user_id ? (
+        // <div className="button-container"> 
+
+        <span
+        onClick={() => {
+          if (window.confirm("Voulez-vous supprimer cet article ?")) {
+            deleteQuote();
+          }
+        }}
+        >
         <img src="./img/icons/trash.svg" alt="trash" />
+    </span>
+          // </div>
+      ): null}
     </div>
   );
 };

@@ -44,6 +44,7 @@ const NewPostForm = () => {
   return (
     <div className="post-container">
       <div className="post-form">
+      <label for="message"></label>
         <textarea
           name="message"
           id="message"
@@ -80,6 +81,7 @@ const NewPostForm = () => {
               accept=".jpg, .jpeg, .png"
               onChange={(e) => handlePicture(e)}
             />
+            <label id="file-upload"></label>
           </div>
           <div className="btn-send">
             {message || postPicture ? (

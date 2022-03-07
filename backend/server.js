@@ -1,10 +1,6 @@
-//---------On crée un programme qui va écouter(attendre) des requêtes http et va y répondre------------
+const http = require("http");
+const app = require("./app");
 
-const http = require("http"); //on importe le package http de node
-const app = require("./app"); //on importe notre app express
-
-
-//la fonction normalizePort renvoie un port valide, qu'il soit fourni sous la forme d'un numéro ou d'une chaîne 
 const normalizePort = (val) => {
   const port = parseInt(val, 10);
 
@@ -16,12 +12,11 @@ const normalizePort = (val) => {
   }
   return false;
 };
+
 const port = normalizePort(process.env.PORT || "3000");
+app.set("port", port);
 
-app.set("port", port); //on dit à app sur quel serveur elle va tourner
 
-
-//la fonction errorHandler recherche les différentes erreurs et les gère de manière appropriée. Elle est ensuite enregistrée dans le serveur
 const errorHandler = (error) => {
   if (error.syscall !== "listen") {
     throw error;
@@ -42,8 +37,8 @@ const errorHandler = (error) => {
       throw error;
   }
 };
-//on appelle la méthode createServer du package http, 
-//qui prend comme argument la fonction qui va être appelée à chaque requête reçue par le serveur; ici la fonction est notre application créée par express.
+
+
 const server = http.createServer(app);
 server.on('error', errorHandler);
 server.on('listening', () => {
@@ -53,4 +48,4 @@ server.on('listening', () => {
 });
 
 
-server.listen(port); //le serveur écoute (attend) les requêtes envoyées
+server.listen(port);

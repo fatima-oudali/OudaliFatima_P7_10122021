@@ -4,14 +4,12 @@ import DeleteCard from "./DeleteCard";
 import CardComment from "../Comment/CardComment";
 import { dateParser } from "../Utils";
 
-const Card = ({ post, isAdmin }) => {
-  const [loadPost, setLoadPost] = useState([]);
+const Card = ({post, isAdmin }) => {
   const [isUpdated, setIsUpdated] = useState(false);
   const [textUpdate, setTextUpdate] = useState(null);
   const [showComments, setShowComments] = useState(false);
   const [userParams, setUserParams] = useState([]);
   const [postPicture, setPostPicture] = useState(null);
-  const [text, setText] = useState([]);
   const [file, setFile] = useState("");
   const [pic, setPic] = useState("true");
 
@@ -21,11 +19,16 @@ const Card = ({ post, isAdmin }) => {
 
     const data = new FormData();
     data.append("user_id", userId);
-    if (textUpdate) {
-      data.append("contenu", textUpdate);
-    }
-    if (file) data.append("file", file);
-    console.log(pic);
+    if (textUpdate) data.append("contenu", textUpdate);
+  
+    if (file) {
+      data.append("file", file);
+  } else {
+    setPic(false) && data.append("file", "");
+  }
+
+    // console.log(pic);
+    // if (pic === false) setFile("");
 
     axios({
       method: "put",
@@ -35,21 +38,6 @@ const Card = ({ post, isAdmin }) => {
     })
       .then(() => window.location.reload())
       .catch((err) => console.log(err));
-
-    if (pic === false) 
-      {data.append("file", "")
-      
-      axios({
-        method: "DELETE",
-        url: `${process.env.REACT_APP_API_URL}api/post/${post.id}/${file}`,
-        withCredentials: true,
-      })
-      .then(() => window.location.reload())
-      .catch((err) => console.log(err));
-  
-    }
-
-
   };
 
   const handlePicture = (e) => {
@@ -57,46 +45,12 @@ const Card = ({ post, isAdmin }) => {
     setFile(e.target.files[0]);
   };
 
-  // const handleDeletePicture = () => {
-  //   if (pic === false) {
-  //     new FormData().append("file", "");
-
-  //     axios({
-  //       method: "DELETE",
-  //       url: `${process.env.REACT_APP_API_URL}api/post/${post.id}/${post.image}`,
-  //       withCredentials: true,
-  //     })
-  //       .then(() => {window.location.reload();
-  //       console.log(post)})
-  //       .catch((err) => console.log(err));
-  //   }
-
-  // };
-
   useEffect(() => {
     axios({
       method: "get",
       url: `${process.env.REACT_APP_API_URL}api/auth`,
     })
       .then((res) => setUserParams(res.data))
-      .catch((err) => console.log(err));
-
-    axios({
-      method: "get",
-      url: `${process.env.REACT_APP_API_URL}api/post`,
-    })
-      .then((res) => {
-        setLoadPost(res.data);
-      })
-      .catch((err) => console.log(err));
-
-    axios({
-      method: "get",
-      url: `${process.env.REACT_APP_API_URL}api/comment`,
-    })
-      .then((res) => {
-        setText(res.data);
-      })
       .catch((err) => console.log(err));
   }, []);
 
@@ -142,6 +96,7 @@ const Card = ({ post, isAdmin }) => {
                     accept=".jpg, .jpeg, .png"
                     onChange={(e) => handlePicture(e)}
                   />
+                  <label id="file-upload"></label>
                 </div>
                 <button className="btn" onClick={updateItem}>
                   Valider modification
@@ -149,14 +104,14 @@ const Card = ({ post, isAdmin }) => {
               </div>
             </div>
           ) : null}
-          {isAdmin || userId === post.user_id ? (
             <div className="button-container">
+              <DeleteCard post={post} isAdmin={isAdmin}/>
+          {userId === post.user_id ? (
               <div onClick={() => setIsUpdated(!isUpdated)}>
                 <img src="./img/icons/edit.svg" alt="edit" />
               </div>
-              <DeleteCard post={post} />
+              ) : null}
             </div>
-          ) : null}
           <div className="card-footer">
             <img
               onClick={() => setShowComments(!showComments)}
@@ -164,7 +119,7 @@ const Card = ({ post, isAdmin }) => {
               alt="comment"
             />
           </div>
-          {showComments && <CardComment post={post} isAdmin={isAdmin}/>}
+          {showComments && <CardComment post={post} isAdmin={isAdmin} />}
         </div>
       </>
     </li>

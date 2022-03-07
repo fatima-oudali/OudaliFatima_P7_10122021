@@ -14,7 +14,7 @@ exports.createComment = (req, res, next) => {
   const user_id = req.body.user_id;
   const post_id = req.body.post_id;
  
-  //    const id = req.body.id;
+  
 
   db.query(
     `INSERT INTO comment (contenu, user_id, post_id) VALUES (?, ?, ?)`,

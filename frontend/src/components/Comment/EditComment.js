@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import DeleteComment from "./DeleteComment";
 
-const EditComment = ({ comment, isAdmin }) => {
+
+const EditComment = ({ comment}) => {
   const [edit, setEdit] = useState(false);
   const [text, setText] = useState("");
   const userId = JSON.parse(localStorage.userId);
@@ -23,7 +23,6 @@ const EditComment = ({ comment, isAdmin }) => {
 
   return (
     <div className="edit-comment">
-      {/* {edit === false && <p>{comment.contenu}</p>} */}
  {edit ? (
         <form action="" onSubmit={handleEdit} className="edit-comment-form">
           <label htmlFor="text" onClick={() => setEdit(!edit)}>
@@ -39,17 +38,11 @@ const EditComment = ({ comment, isAdmin }) => {
           <input type="submit" value="Valider modification" />
         </form>
       ) : null}
-      {isAdmin || userId === comment.user_id ? (
-        <div className="btn">
+      {userId === comment.user_id ? (
           <span onClick={() => setEdit(!edit)}>
             <img src="./img/icons/edit.svg" alt="edit" />
           </span>
-          <DeleteComment comment={comment} />
-          
-        </div>
       ) : null}
-
-     
     </div>
   );
 };
