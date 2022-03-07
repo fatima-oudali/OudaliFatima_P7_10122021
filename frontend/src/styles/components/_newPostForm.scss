@@ -29,12 +29,16 @@
     position: relative;
     margin: 0 auto 0;
 
+    label {
+      display: none;
+    }
     textarea {
       height: 62px;
       width: 100%;
       font-size: 1.4rem;
-      padding: 12px 15px;
+      padding: 18px 15px;
       border-radius: 20px 20px 6px 20px;
+      
     }
     .card-container {
       background: $white;
@@ -137,6 +141,9 @@
           &::-webkit-file-upload-button {
             cursor: pointer;
           }
+        }
+        label {
+          display: none;
         }
       }
       p {

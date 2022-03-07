@@ -57,7 +57,6 @@ exports.modifyPost = (req, res, next) => {
   
   if (req.file) {
     image = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
-  }
     db.query('SELECT * FROM post WHERE id =?', [id], (err, result) => {
       if (err) {
         console.log(err);
@@ -68,6 +67,8 @@ exports.modifyPost = (req, res, next) => {
         }
       }
     })
+  } 
+  
 
   if (contenu && image) {
     query = `UPDATE post SET contenu = '${contenu}', image = '${image}' WHERE id = ${id}`;

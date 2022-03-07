@@ -44,11 +44,11 @@ const NewPostForm = () => {
   return (
     <div className="post-container">
       <div className="post-form">
-      <label for="message"></label>
+      <label htmlFor="message">Message</label>
         <textarea
           name="message"
           id="message"
-          placeholder={"Qoui de neuf, " + userPseudo + "?"}
+          placeholder={"Quoi de neuf, " + userPseudo + "?"}
           onChange={(e) => setMessage(e.target.value)}
           value={message}
         />
@@ -74,6 +74,7 @@ const NewPostForm = () => {
         <div className="footer-form">
           <div className="icon">
             <img src="./img/icons/picture.svg" alt="img" />
+            <label htmlFor="file-upload">.</label>
             <input
               type="file"
               id="file-upload"
@@ -81,7 +82,6 @@ const NewPostForm = () => {
               accept=".jpg, .jpeg, .png"
               onChange={(e) => handlePicture(e)}
             />
-            <label id="file-upload"></label>
           </div>
           <div className="btn-send">
             {message || postPicture ? (

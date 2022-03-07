@@ -17,7 +17,7 @@ const Home = () => {
 
   useEffect(() => {
     axios
-    .get("http://localhost:3000/api/auth/" + `${localStorage.userId}`)
+    .get(`${process.env.REACT_APP_API_URL}api/auth/${localStorage.userId}`)
     .then((res) => {
       setIsAdmin(res.data[0].isAdmin);
     })

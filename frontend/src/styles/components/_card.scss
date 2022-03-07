@@ -6,17 +6,16 @@
   border-radius: 20px;
   margin: 8px auto;
   position: relative;
-  // min-height: 100px;
+  
   
   
   @media screen and(max-width: 590px) {
     grid-template-columns: 1fr;
     padding: 15px 70px;
-    // padding: 5px 5px 15px 5px ;
+    
   }
   @media screen and(max-width: 440px) {
-    // padding-top: 26px;
-    // padding: 0;
+   
   }
 
 
@@ -35,10 +34,7 @@
         border-radius: 14px;
       }
     }
-    @media screen and(max-width: 590px) {
-      // position: absolute;
-      // transform: translate(17px, 18px);
-      
+    @media screen and(max-width: 590px) { 
       display: none;
     }
   }
@@ -148,6 +144,9 @@
           &::-webkit-file-upload-button {
             cursor: pointer;
           }
+        }
+        label {
+          display: none;
         }
       }
     }

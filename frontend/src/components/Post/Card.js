@@ -11,8 +11,7 @@ const Card = ({post, isAdmin }) => {
   const [userParams, setUserParams] = useState([]);
   const [postPicture, setPostPicture] = useState(null);
   const [file, setFile] = useState("");
-  const [pic, setPic] = useState("true");
-
+  
   const userId = JSON.parse(localStorage.userId);
 
   const updateItem = () => {
@@ -23,12 +22,8 @@ const Card = ({post, isAdmin }) => {
   
     if (file) {
       data.append("file", file);
-  } else {
-    setPic(false) && data.append("file", "");
-  }
-
-    // console.log(pic);
-    // if (pic === false) setFile("");
+  } 
+  
 
     axios({
       method: "put",
@@ -56,8 +51,7 @@ const Card = ({post, isAdmin }) => {
 
   return (
     <li className="card-container" key={post.id}>
-      <>
-        <div className="card-left">
+          <div className="card-left">
           <img src="./img/profil.png" alt="poster-pic" />
         </div>
         <div className="card-right">
@@ -72,14 +66,6 @@ const Card = ({post, isAdmin }) => {
           {post.image && isUpdated === false ? (
             <img src={post.image} alt="card-pic" className="card-pic" />
           ) : null}
-          {post.image && pic && isUpdated ? (
-            <div className="delete-card-pic">
-              {<img src={post.image} alt="card-pic" className="card-pic" />}
-              <div onClick={() => {setPic(!pic)}} className="delete-icon">
-                <img src="./img/icons/croix.svg" alt="croix" />
-              </div>
-            </div>
-          ) : null}
           {isUpdated ? (
             <div className="update-post">
               <textarea
@@ -89,6 +75,7 @@ const Card = ({post, isAdmin }) => {
               <div className="button-container">
                 <div className="icon icon-img">
                   <img src="./img/icons/picture.svg" alt="img" />
+                  <label htmlFor="file-upload">.</label>
                   <input
                     type="file"
                     id="file-upload"
@@ -96,7 +83,6 @@ const Card = ({post, isAdmin }) => {
                     accept=".jpg, .jpeg, .png"
                     onChange={(e) => handlePicture(e)}
                   />
-                  <label id="file-upload"></label>
                 </div>
                 <button className="btn" onClick={updateItem}>
                   Valider modification
@@ -105,12 +91,12 @@ const Card = ({post, isAdmin }) => {
             </div>
           ) : null}
             <div className="button-container">
-              <DeleteCard post={post} isAdmin={isAdmin}/>
           {userId === post.user_id ? (
-              <div onClick={() => setIsUpdated(!isUpdated)}>
+            <div onClick={() => setIsUpdated(!isUpdated)}>
                 <img src="./img/icons/edit.svg" alt="edit" />
               </div>
               ) : null}
+              <DeleteCard post={post} isAdmin={isAdmin}/>
             </div>
           <div className="card-footer">
             <img
@@ -121,7 +107,7 @@ const Card = ({post, isAdmin }) => {
           </div>
           {showComments && <CardComment post={post} isAdmin={isAdmin} />}
         </div>
-      </>
+  
     </li>
   );
 };
