@@ -16,10 +16,6 @@ const DeleteCard = ({post, isAdmin}) => {
     
     return ( 
       <div className="button-container">
-
-      {isAdmin || userId === post.user_id ? (
-        // <div className="button-container"> 
-
         <span
         onClick={() => {
           if (window.confirm("Voulez-vous supprimer cet article ?")) {
@@ -29,8 +25,7 @@ const DeleteCard = ({post, isAdmin}) => {
         >
         <img src="./img/icons/trash.svg" alt="trash" />
     </span>
-          // </div>
-      ): null}
+        
     </div>
   );
 };

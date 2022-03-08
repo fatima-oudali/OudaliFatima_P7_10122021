@@ -24,7 +24,6 @@ const Card = ({post, isAdmin }) => {
       data.append("file", file);
   } 
   
-
     axios({
       method: "put",
       url: `${process.env.REACT_APP_API_URL}api/post/${post.id}`,
@@ -96,7 +95,9 @@ const Card = ({post, isAdmin }) => {
                 <img src="./img/icons/edit.svg" alt="edit" />
               </div>
               ) : null}
+          {isAdmin || userId === post.user_id ? (
               <DeleteCard post={post} isAdmin={isAdmin}/>
+              ) : null}
             </div>
           <div className="card-footer">
             <img
